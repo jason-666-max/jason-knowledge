@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>处世法则27条 — Jason's Knowledge</title>
+    <style>        :root {
+            --bg: #0A0A0B;
+            --surface: #1A1A1D;
+            --surface-alt: #18181B;
+            --border: #27272A;
+            --border-subtle: #1C1C20;
+            --accent: #EC4899;
+            --accent-hover: #F472B6;
+            --text: #FAFAFA;
+            --text-secondary: #A1A1AA;
+            --text-muted: #71717A;
+            --text-subtle: #8A8A8A;
+            --font-serif: 'Noto Serif TC', 'Source Han Serif CN', 'Songti SC', serif;
+            --font-sans: 'Noto Sans TC', 'Source Han Sans CN', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+        }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { font-size: 16px; -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
+        body { font-family: var(--font-sans); background: var(--bg); color: var(--text); line-height: 1.8; min-height: 100vh; }
+        a { text-decoration: none; color: inherit; }
+        .progress-bar { position: fixed; top: 0; left: 0; height: 3px; background: var(--accent); z-index: 9999; width: 0%; transition: width 0.1s linear; }
+        .back-to-top { position: fixed; bottom: 36px; right: 36px; width: 44px; height: 44px; background: var(--surface); border: 1px solid var(--border); color: var(--text-secondary); display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 999; opacity: 0; transform: translateY(20px); transition: opacity 0.3s, transform 0.3s; font-size: 18px; }
+        .back-to-top.visible { opacity: 1; transform: translateY(0); }
+        .back-to-top:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+        .sticky-nav { position: sticky; top: 0; z-index: 998; }
+        .page-wrapper { width: 1440px; margin: 0 auto; transform-origin: top center; background: var(--bg); }
+        .article-header { background: var(--surface-alt); padding: 48px 120px 40px; display: flex; justify-content: center; }
+        .header-inner { width: 720px; display: flex; flex-direction: column; align-items: center; gap: 16px; text-align: center; }
+        .back-link { font-size: 14px; color: var(--text-muted); transition: color 0.2s; }
+        .back-link:hover { color: var(--accent); }
+        .cat-badge { display: inline-flex; padding: 4px 14px; background: var(--surface); border-radius: 9999px; font-size: 13px; font-weight: 500; color: var(--accent); letter-spacing: 1px; }
+        .article-title { font-family: var(--font-serif); font-size: 44px; font-weight: 700; color: var(--text); line-height: 56px; }
+        .article-body { padding: 48px 120px 100px; display: flex; justify-content: center; }
+        .content-column { width: 720px; }
+        .article-content { font-size: 17px; color: var(--text-secondary); line-height: 32px; }
+        .article-content p { margin-bottom: 20px; }
+        .article-content h2 { font-family: var(--font-serif); font-size: 26px; font-weight: 700; color: var(--text); margin-top: 40px; margin-bottom: 16px; line-height: 36px; }
+        .article-content h3 { font-family: var(--font-serif); font-size: 20px; font-weight: 600; color: var(--text); margin-top: 32px; margin-bottom: 12px; line-height: 30px; }
+        .article-content strong, .article-content b { color: var(--text); font-weight: 600; }
+        .article-content blockquote { border-left: 3px solid var(--accent); padding: 12px 20px; margin: 24px 0; background: var(--surface); font-style: italic; color: var(--text-subtle); font-family: var(--font-serif); font-size: 16px; line-height: 28px; }
+        .article-content hr { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
+        .article-content ul, .article-content ol { margin: 16px 0; padding-left: 24px; }
+        .article-content li { margin-bottom: 8px; }
+        .article-footer { border-top: 1px solid var(--border); padding: 32px 120px; display: flex; justify-content: center; }
+        .article-footer-inner { width: 720px; display: flex; justify-content: space-between; align-items: center; }
+        .article-footer a { font-size: 14px; color: var(--text-muted); transition: color 0.2s; }
+        .article-footer a:hover { color: var(--accent); }
+        @media (max-width: 768px) { .page-wrapper { width: 100%; } .header { padding: 12px 16px; height: auto; flex-wrap: wrap; } .header-nav { gap: 16px; } .hero { padding: 48px 24px 40px; } .hero-title { font-size: 36px; line-height: 44px; } .hero-subtitle { font-size: 20px; line-height: 30px; } .articles { padding: 40px 16px; } .articles-grid { grid-template-columns: 1fr !important; } .section-title { font-size: 26px; } .footer-top { flex-direction: column; padding: 40px 24px; gap: 32px; } .footer-bottom { flex-direction: column; padding: 20px 24px; gap: 12px; text-align: center; } .article-header { padding: 32px 16px 28px; } .header-inner, .content-column { width: 100%; } .article-title { font-size: 30px; line-height: 38px; } .article-body { padding: 32px 16px 60px; } .article-footer { padding: 24px 16px; } .article-footer-inner { width: 100%; flex-wrap: wrap; gap: 12px; } .sticky-nav { padding: 8px 16px; font-size: 13px; } .search-panel { width: 90vw; max-height: 60vh; } .back-to-top { bottom: 20px; right: 20px; width: 40px; height: 40px; } .hero-stats { flex-wrap: wrap; gap: 16px; } .hero-buttons { flex-direction: column; gap: 12px; } .card-thumb { height: 160px; } .card-body { padding: 16px; } .article-card { width: 100%; } .articles-grid { gap: 16px !important; } .footer-nav { flex-wrap: wrap; gap: 32px; } .footer { width: 100%; } .comparison-box { grid-template-columns: 1fr; } }
+        [data-theme="light"] { --bg: #FAFAFA; --surface: #FFFFFF; --surface-alt: #F2F2F2; --primary: #F5F5F5; --secondary: #E4E4E7; --border: #E4E4E7; --border-subtle: #E4E4E7; --text: #09090B; --text-secondary: #52525B; --text-muted: #71717A; --text-subtle: #8A8A8A; }
+        .search-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 10000; display: none; align-items: flex-start; justify-content: center; padding-top: 120px; }
+        .search-overlay.open { display: flex; }
+        .search-panel { background: var(--surface); border: 1px solid var(--border); width: 560px; max-height: 480px; overflow-y: auto; display: flex; flex-direction: column; }
+        .search-input-wrap { display: flex; align-items: center; padding: 20px 24px; border-bottom: 1px solid var(--border); gap: 12px; }
+        .search-input-wrap input { flex: 1; background: none; border: none; outline: none; font-size: 18px; color: var(--text); font-family: var(--font-sans); }
+        .search-input-wrap input::placeholder { color: var(--text-muted); }
+        .search-input-wrap button { background: none; border: none; font-size: 18px; color: var(--text-muted); cursor: pointer; padding: 4px; }
+        .search-results { display: flex; flex-direction: column; }
+        .search-result { display: flex; flex-direction: column; gap: 4px; padding: 16px 24px; border-bottom: 1px solid var(--border-subtle); cursor: pointer; transition: background 0.15s; }
+        .search-result:hover { background: var(--surface-alt); }
+        .search-result-title { font-size: 16px; font-weight: 600; color: var(--text); font-family: var(--font-serif); }
+        .search-result-title em { color: var(--accent); font-style: normal; }
+        .search-result-excerpt { font-size: 13px; color: var(--text-muted); line-height: 20px; }
+        .search-empty { padding: 40px 24px; text-align: center; color: var(--text-muted); font-size: 15px; }
+        @media (max-width: 768px) { .page-wrapper { width: 100%; } .header { padding: 12px 16px; height: auto; flex-wrap: wrap; } .header-nav { gap: 16px; } .hero { padding: 48px 24px 40px; } .hero-title { font-size: 36px; line-height: 44px; } .hero-subtitle { font-size: 20px; line-height: 30px; } .articles { padding: 40px 16px; } .articles-grid { grid-template-columns: 1fr !important; } .section-title { font-size: 26px; } .footer-top { flex-direction: column; padding: 40px 24px; gap: 32px; } .footer-bottom { flex-direction: column; padding: 20px 24px; gap: 12px; text-align: center; } .article-header { padding: 32px 16px 28px; } .header-inner, .content-column { width: 100%; } .article-title { font-size: 30px; line-height: 38px; } .article-body { padding: 32px 16px 60px; } .article-footer { padding: 24px 16px; } .article-footer-inner { width: 100%; flex-wrap: wrap; gap: 12px; } .sticky-nav { padding: 8px 16px; font-size: 13px; } .search-panel { width: 90vw; max-height: 60vh; } .back-to-top { bottom: 20px; right: 20px; width: 40px; height: 40px; } .hero-stats { flex-wrap: wrap; gap: 16px; } .hero-buttons { flex-direction: column; gap: 12px; } .card-thumb { height: 160px; } .card-body { padding: 16px; } .article-card { width: 100%; } .articles-grid { gap: 16px !important; } .footer-nav { flex-wrap: wrap; gap: 32px; } .footer { width: 100%; } .comparison-box { grid-template-columns: 1fr; } }</style>
+</head>
+<body>
+<div class="search-overlay" id="searchOverlay">
+<div class="search-panel">
+<div class="search-input-wrap"><input type="text" id="searchInput" placeholder="搜索文章... (Ctrl+K 快捷键)" autocomplete="off"><button onclick="document.getElementById('searchOverlay').classList.remove('open')">✕</button></div>
+<div class="search-results" id="searchResults"></div>
+</div></div>
+<div class="progress-bar" id="progressBar"></div>
+<div class="back-to-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</div>
+<nav class="sticky-nav" style="display:flex;align-items:center;justify-content:space-between;padding:12px 48px;background:var(--surface-alt);border-bottom:1px solid var(--border);gap:32px;">
+<a href="../index.html" style="font-size:15px;color:var(--text-secondary);transition:color 0.2s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-secondary)'">← 返回首页</a>
+<span style="font-size:13px;color:var(--text-muted);">处世法则27条</span>
+<a href="../index.html" style="font-size:15px;color:var(--text-secondary);transition:color 0.2s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-secondary)'">Jason's Knowledge</a>
+</nav>
+<div class="page-wrapper">
+<header class="article-header"><div class="header-inner">
+<span class="cat-badge">图谱 · 处世法则27条</span>
+<h1 class="article-title">处世法则27条</h1>
+</div></header>
+<main class="article-body"><div class="content-column"><div class="article-content">
+<ol>
+<li>别轻易同情任何人，很多看似可怜的人，身上都藏着让人无奈的性格与选择。</li>
+<li>跟你翻过脸、坑过你的人，不管关系多近，都别再回到从前。伤害过一次的人，很容易再伤你第二次。</li>
+<li>层次差距太大的交往，大多是无效社交。不在一个平台，再热情也换不来对等的尊重与认可。</li>
+<li>学会闷声干大事、悄悄赚大钱。人性本就复杂，恨你有、笑你无、怕你富、嫌你穷。守住目标、收入、家事、过错这四件事，能避开大半是非。</li>
+<li>别把真心和秘密全盘托出，你以为的信任，可能会变成别人手里的谈资。永远别高估自己在别人心里的位置，对人太好，久了就会变成理所当然。</li>
+<li>少发朋友圈炫耀，低调才是最好的自保。钱和车不随便外借，人多杂乱的酒局，能不去就尽量不去。</li>
+<li>实力不够时，少说话、多做事。别一激动就对人掏心掏肺，事后回想多半会后悔不已。</li>
+<li>出门游玩不必到处宣扬，你分享的是快乐，别人听来可能是炫耀。亲戚朋友的孩子，再不懂事也别随意指责。</li>
+<li>别人没主动通知你的事，就假装不知道，不追问、不打听。许久不联系的人突然找你，不必急着回应。</li>
+<li>别人没开口求助，就别主动帮忙，往往吃力不讨好。做人别太老实，也别和谁走得太近，很多伤害，往往来自熟人。</li>
+<li>婚姻看重的是安稳与品行，不是外表。婚后自觉和异性保持距离，是最基本的底线与修养。</li>
+<li>邻居不必强做朋友，熟人介绍的工作慎入，别轻易得罪领导身边的红人。</li>
+<li>整日无所事事的男人，尽量少来往；过于忙碌的女人，背后多半藏着不简单的故事。</li>
+<li>到新环境，保持低调，少反驳、多倾听、会赞美。别别人问一句，你就滔滔不绝说十句。</li>
+<li>别总跟身边人炫耀喜事，真心为你高兴的人很少。对刚认识的人，保持适度冷淡，反而更被尊重。</li>
+<li>没人主动找你，说明你暂时不具备被需要的价值。任何关系里，对方只顾自己、不顾你，就及时止损。</li>
+<li>求人办事，再熟也要懂得回馈。没把握的事不轻易答应，有把握的事，也别满口打包票。</li>
+<li>先打理好形象，再展示能力，否则很容易被低估。没有收拾残局的能力，就别放纵自己的情绪。</li>
+<li>说话是为了让人舒服，不是让人难堪。别把口无遮拦，当成直爽坦率的借口。</li>
+<li>和领导独处多听少说，同事抱怨只附和不站队。看不透局势时，先做清醒的旁观者。</li>
+<li>对小人，表面客气、不深交也不断交；对讨厌的人保持微笑，是成年人的必修课。</li>
+<li>别轻易暴露自己的真实状态，过得好有人嫉妒，过得差有人嘲笑，冷暖自知就好。</li>
+<li>存款和收入，别对任何人坦白。就算日子变好，也保持低调，财路千万不要外露。</li>
+<li>别把时间浪费在无效社交上，你有本事、有底气，关系自然顺畅。很多矛盾，本质都是实力与价值的问题。</li>
+<li>过度依赖别人，等于放弃自己。能为你遮风挡雨的人，也可能挡住你的光，靠自己最稳。</li>
+<li>别和好朋友合伙做生意，涉及利益纠葛，很容易伤感情。也别随便给人出主意，做好无功、做错必怪。</li>
+<li>不必和烂人烂事撕破脸，也不用刻意报复。不和重要的人计较小事，不和不重要的人较真大事，人品是运气，心态是风水。</li>
+</ol>
+</div></div></main>
+<footer class="article-footer"><div class="article-footer-inner">
+<a href="后半句是精华.html">← 后半句是精华</a>
+<a href="javascript:history.back()">回到上一页</a>
+<a href="如何有底气.html">如何有底气？ →</a>
+</div></footer>
+</div>
+<script>var SEARCH_INDEX=[{"t": "一个很好的人，为什么会突然离开", "e": "好人不长寿，祸害活千年", "u": "articles/一个很好的人为什么会突然离开.html"}, {"t": "三代之间必降兴家之子", "e": "每一个家族的翻身", "u": "articles/三代之间必降兴家之子.html"}, {"t": "三观是什么", "e": "你读过的书，走过的路，见过的人，就是你的世界观，一个人的世界观，由他", "u": "articles/三观是什么.html"}, {"t": "世界的本质", "e": "确定论", "u": "articles/世界的本质.html"}, {"t": "人不可能每一步都正确", "e": "我们不能站在现在的高度", "u": "articles/人不可能每一步都正确.html"}, {"t": "人和人关系的本质是什么", "e": "价值交换", "u": "articles/人和人关系的本质是什么.html"}, {"t": "人在什么时候进步最快", "e": "一个人进步最快的时候，是他失去安全感的时候", "u": "articles/人在什么时候进步最快.html"}, {"t": "人生的本质", "e": "2024年，英伟达创始人黄仁勋在斯坦福大学的一场演讲中说：", "u": "articles/人生的本质.html"}, {"t": "人生的运气", "e": "一个人，和他一生所从事工作的相遇", "u": "articles/人生的运气.html"}, {"t": "什么叫开悟", "e": "如果一个人能够发现自己身上的种种缺点", "u": "articles/什么叫开悟.html"}, {"t": "什么时候才能大彻大悟", "e": "无人可依的时候", "u": "articles/什么时候才能大彻大悟.html"}, {"t": "什么是命运", "e": "当你遇见一件事", "u": "articles/什么是命运.html"}, {"t": "县城真相：世袭与垄断下的底层困局", "e": "一线城市的打工者中流传着一种格外刺耳的声音，他们认为，只要逃离了北上广深的内卷，回到看似安逸的县城，就能抬头做人，当个有头有脸的人物", "u": "articles/县城真相世袭与垄断下的底层困局.html"}, {"t": "后半句是精华", "e": "不听老人言，吃亏在眼前；尽信老人言，终身未向前", "u": "articles/后半句是精华.html"}, {"t": "处世法则27条", "e": "1. 别轻易同情任何人，很多看似可怜的人，身上都藏着让人无奈的性格与选择。  \n2. 跟你翻过脸、坑过你的人，不管关系多近，都别再回到从前。伤害过一次的人，很容易再伤你第二次。  \n3. 层次差距太大", "u": "articles/处世法则27条.html"}, {"t": "如何有底气？", "e": "一个人在社会上，怎样才算有底气？", "u": "articles/如何有底气.html"}, {"t": "婚姻是什么", "e": "一个七十多岁的老人说，“婚姻就是我午夜三点醒来的时候，口渴或者伤口疼，我只需要捅捅睡在旁边的那个人，她就知道，我要喝水”", "u": "articles/婚姻是什么.html"}, {"t": "寒门难出贵子", "e": "寒门立志", "u": "articles/寒门难出贵子.html"}, {"t": "当滤镜褪去：吸引力的反思", "e": "当一个男人真正挣脱性欲带来的执念与滤镜，不再被原始冲动裹挟着审视异性，便会恍然惊觉：世间绝大多数女性，除去皮囊带来的视觉吸引，并无太多值得过度追捧的光环", "u": "articles/当滤镜褪去吸引力的反思.html"}, {"t": "待人接物的礼仪", "e": "左手戴金，右手戴银，背后教妻，当面教子", "u": "articles/待人接物的礼仪.html"}, {"t": "所有事情的第一核心", "e": "1. 家庭的第一核心，是经济，而不是感情。经济基础直接决定家庭的安稳度，光靠情绪维系，终究很难扛住现实的风雨。 \n\n2. 职场的第一准则，是价值，而不是努力。只懂埋头苦干却不提升核心竞争力，很容易被替", "u": "articles/所有事情的第一核心.html"}, {"t": "最顶级的亲子关系是什么", "e": "成为孩子背后的山", "u": "articles/最顶级的亲子关系是什么.html"}, {"t": "毛选解析：和任何人搞好关系的三个模型", "e": "半个月前，北京。一位研究了一辈子《毛选》的前辈，在海淀他家的书房里给我上了这辈子最重要的一课。", "u": "articles/毛选解析和任何人搞好关系的三个模型.html"}, {"t": "男人该有的样子", "e": "慢热 沉默 抽烟 小酌，喜欢独处，半点斯文，半点鲁莽，不猥琐", "u": "articles/男人该有的样子.html"}, {"t": "真正的孝心是什么", "e": "前三十年，看父敬子", "u": "articles/真正的孝心是什么.html"}, {"t": "线性思维与非线性", "e": "**线性思维**与**非线性思维**在赚钱认知上的根本差异：", "u": "articles/线性思维与非线性.html"}, {"t": "结局重要还是过程重要", "e": "结局已定，就好好做过程", "u": "articles/结局重要还是过程重要.html"}, {"t": "诗词：一去不返的青春", "e": "春风若有怜花意，可否许我再少年", "u": "articles/诗词一去不返的青春.html"}, {"t": "跟过大佬后：职场斗争的四层认知颠覆", "e": "跟过真正的大佬后，才意识到职场斗争的残酷", "u": "articles/跟过大佬后职场斗争的四层认知颠覆.html"}, {"t": "顶级家族培养儿子的总结", "e": "男孩和女孩，从出生那天起，就注定了不同的培养路径：", "u": "articles/顶级家族培养儿子的总结.html"}, {"t": "高情商说话", "e": "只需要记住一点", "u": "articles/高情商说话.html"}, {"t": "传承与家族", "e": "**来源：[[顶级家族培养儿子的总结]]**", "u": "articles/传承与家族.html"}, {"t": "处世与自我保护", "e": "**来源：[[处世法则27条]]**", "u": "articles/处世与自我保护.html"}, {"t": "婚姻与亲密关系", "e": "**来源：[[婚姻是什么]]**", "u": "articles/婚姻与亲密关系.html"}, {"t": "接纳与安命", "e": "**来源：[[人生的本质]]**", "u": "articles/接纳与安命.html"}, {"t": "阶层与社会流动", "e": "**来源：[[县城真相：世袭与垄断下的底层困局]]**", "u": "articles/阶层与社会流动.html"}];</script>
+<script>
+(function(){
+    var bar=document.getElementById('progressBar');
+    var btn=document.getElementById('backTop');
+    window.addEventListener('scroll',function(){
+        var h=document.documentElement.scrollHeight-document.documentElement.clientHeight;
+        var p=h>0?Math.min(100,Math.round(window.scrollY/h*100)):0;
+        bar.style.width=p+'%';
+        btn.classList.toggle('visible',window.scrollY>400);
+    });
+    var theme=localStorage.getItem('theme')||'dark';
+    document.documentElement.setAttribute('data-theme',theme);
+    var themeBtn=document.getElementById('themeBtn');
+    if(themeBtn){ themeBtn.textContent=theme==='dark'?'☀️':'🌙'; themeBtn.onclick=function(){ theme=theme==='dark'?'light':'dark'; document.documentElement.setAttribute('data-theme',theme); localStorage.setItem('theme',theme); themeBtn.textContent=theme==='dark'?'☀️':'🌙'; }; }
+    var searchBtn=document.getElementById('searchBtn');
+    var searchOverlay=document.getElementById('searchOverlay');
+    var searchInput=document.getElementById('searchInput');
+    var searchResults=document.getElementById('searchResults');
+    if(searchBtn&&searchOverlay){
+        searchBtn.onclick=function(){ searchOverlay.classList.add('open'); searchInput.focus(); };
+        searchOverlay.addEventListener('click',function(e){ if(e.target===searchOverlay)searchOverlay.classList.remove('open'); });
+        document.addEventListener('keydown',function(e){ if(e.key==='Escape')searchOverlay.classList.remove('open'); if((e.ctrlKey||e.metaKey)&&e.key==='k'){ e.preventDefault(); searchOverlay.classList.add('open'); searchInput.focus(); } });
+    }
+    if(searchInput){
+        searchInput.addEventListener('input',function(){
+            var q=searchInput.value.trim().toLowerCase();
+            searchResults.innerHTML='';
+            if(!q)return;
+            var hits=[];
+            for(var i=0;i<SEARCH_INDEX.length;i++){
+                var item=SEARCH_INDEX[i];
+                var score=0;
+                if(item.t.toLowerCase().indexOf(q)>=0)score+=3;
+                if(item.e.toLowerCase().indexOf(q)>=0)score+=1;
+                if(score>0)hits.push({item:item,score:score});
+            }
+            hits.sort(function(a,b){return b.score-a.score;});
+            if(hits.length===0){ searchResults.innerHTML='<div class="search-empty">没有找到匹配的文章</div>'; return; }
+            for(var j=0;j<Math.min(hits.length,12);j++){
+                var h=hits[j].item;
+                var div=document.createElement('div');
+                div.className='search-result';
+                div.innerHTML='<span class="search-result-title">'+h.t.replace(new RegExp('('+q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','gi'),'<em>$1</em>')+'</span><span class="search-result-excerpt">'+h.e.substring(0,120)+'</span>';
+                div.onclick=function(url){return function(){window.location.href=url;};}(h.u);
+                searchResults.appendChild(div);
+            }
+        });
+    }
+})();
+</script>
+</body></html>

@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图谱 — Jason's Knowledge</title>
+    <style>        :root {
+            --bg: #0A0A0B; --surface: #1A1A1D; --primary: #18181B; --secondary: #27272A;
+            --accent: #EC4899; --accent-hover: #F472B6; --text: #FAFAFA;
+            --text-secondary: #A1A1AA; --text-muted: #71717A; --border: #26262A;
+            --font-serif: 'Noto Serif TC', 'Source Han Serif CN', 'Songti SC', serif;
+            --font-sans: 'Noto Sans TC', 'Source Han Sans CN', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+        }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { font-size: 16px; -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
+        body { font-family: var(--font-sans); background: var(--bg); color: var(--text); line-height: 1.5; min-height: 100vh; }
+        a { text-decoration: none; color: inherit; }
+        .progress-bar { position: fixed; top: 0; left: 0; height: 3px; background: var(--accent); z-index: 9999; width: 0%; transition: width 0.1s linear; }
+        .back-to-top { position: fixed; bottom: 36px; right: 36px; width: 44px; height: 44px; background: var(--surface); border: 1px solid var(--border); color: var(--text-secondary); display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 999; opacity: 0; transform: translateY(20px); transition: opacity 0.3s, transform 0.3s; font-size: 18px; }
+        .back-to-top.visible { opacity: 1; transform: translateY(0); }
+        .back-to-top:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+        .page-wrapper { width: 1440px; margin: 0 auto; transform-origin: top center; background: var(--bg); }
+        .header { display: flex; align-items: center; justify-content: space-between; padding: 16px 48px; background: var(--primary); border-bottom: 1px solid var(--secondary); height: 60px; gap: 32px; position: sticky; top: 0; z-index: 998; }
+        .header-logo { font-family: var(--font-serif); font-size: 20px; font-weight: 700; color: var(--text); }
+        .header-nav { display: flex; align-items: center; gap: 28px; }
+        .header-nav a { font-size: 15px; color: var(--text-secondary); transition: color 0.2s; }
+        .header-nav a.active, .header-nav a:hover { color: var(--accent); }
+        .header-right { display: flex; align-items: center; gap: 16px; }
+        .header-right button { background: none; border: none; font-size: 16px; cursor: pointer; color: var(--text-secondary); padding: 4px; line-height: 1; }
+        .hero { display: flex; flex-direction: column; align-items: center; padding: 80px 120px 60px; gap: 20px; background: var(--primary); text-align: center; }
+        .hero-badge { display: flex; align-items: center; gap: 8px; padding: 6px 16px; background: var(--secondary); border-radius: 9999px; }
+        .hero-badge-dot { width: 8px; height: 8px; background: var(--accent); border-radius: 9999px; }
+        .hero-badge-text { font-size: 13px; font-weight: 500; color: var(--text); }
+        .hero-title { font-family: var(--font-serif); font-size: 64px; font-weight: 700; color: var(--text); line-height: 78px; }
+        .hero-subtitle { font-family: var(--font-serif); font-size: 26px; font-weight: 600; color: var(--accent); line-height: 38px; }
+        .hero-desc { font-size: 16px; color: var(--text-secondary); line-height: 24px; }
+        .hero-buttons { display: flex; gap: 16px; margin-top: 4px; }
+        .btn-primary { display: flex; align-items: center; justify-content: center; padding: 14px 32px; background: var(--accent); color: #fff; font-size: 16px; font-weight: 500; cursor: pointer; transition: background 0.2s; }
+        .btn-primary:hover { background: var(--accent-hover); }
+        .btn-secondary { display: flex; align-items: center; justify-content: center; padding: 14px 32px; border: 1px solid var(--text-secondary); color: var(--text-secondary); font-size: 16px; font-weight: 500; cursor: pointer; transition: border-color 0.2s, color 0.2s; }
+        .btn-secondary:hover { border-color: var(--text); color: var(--text); }
+        .hero-line { width: 60px; height: 3px; background: var(--accent); }
+        .hero-stats { display: flex; gap: 48px; font-size: 14px; color: var(--text-muted); }
+        .articles { padding: 80px 120px; display: flex; flex-direction: column; gap: 40px; background: var(--bg); }
+        .section-header { display: flex; flex-direction: column; gap: 8px; }
+        .section-title { font-family: var(--font-serif); font-size: 36px; font-weight: 700; color: var(--text); line-height: 48px; }
+        .section-subtitle { font-size: 16px; color: #8A8A8A; line-height: 24px; }
+        .articles-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+        .article-card { display: flex; flex-direction: column; background: var(--surface); border: 1px solid var(--secondary); overflow: hidden; transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s ease, border-color 0.3s; color: inherit; }
+        .article-card:hover { transform: translateY(-6px); box-shadow: 0 12px 40px rgba(236,72,153,0.15); border-color: var(--accent); }
+        .card-thumb { height: 200px; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative; }
+        .card-thumb::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.5), transparent); opacity: 0; transition: opacity 0.3s; z-index: 1; }
+        .article-card:hover .card-thumb::after { opacity: 1; }
+        .card-thumb-label { font-family: var(--font-serif); font-size: 24px; font-weight: 700; color: var(--accent); position: relative; z-index: 2; transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1); }
+        .article-card:hover .card-thumb-label { transform: scale(1.15); }
+        .card-body { padding: 24px; display: flex; flex-direction: column; gap: 12px; }
+        .card-category { font-size: 12px; font-weight: 500; color: var(--accent); letter-spacing: 2px; }
+        .card-title { font-family: var(--font-serif); font-size: 20px; font-weight: 700; color: var(--text); line-height: 28px; transition: color 0.2s; }
+        .article-card:hover .card-title { color: var(--accent); }
+        .card-excerpt { font-size: 14px; color: #8A8A8A; line-height: 22px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        .card-date { font-size: 13px; color: var(--text-muted); }
+        .view-more { display: flex; justify-content: center; padding-top: 8px; }
+        .view-more a { font-size: 15px; font-weight: 500; color: var(--accent); transition: color 0.2s; }
+        .view-more a:hover { color: var(--accent-hover); }
+        .footer { display: flex; flex-direction: column; background: var(--primary); }
+        .footer-top { display: flex; justify-content: space-between; padding: 64px 120px; gap: 80px; }
+        .footer-brand { display: flex; flex-direction: column; gap: 16px; max-width: 280px; }
+        .footer-logo { font-family: var(--font-serif); font-size: 22px; font-weight: 700; color: var(--text); }
+        .footer-tagline { font-size: 14px; color: var(--text-secondary); line-height: 22px; }
+        .footer-quote { font-family: var(--font-serif); font-size: 13px; color: var(--text-muted); font-style: italic; }
+        .footer-nav { display: flex; gap: 64px; }
+        .footer-col { display: flex; flex-direction: column; gap: 12px; }
+        .footer-col-title { font-size: 13px; font-weight: 700; color: var(--text); letter-spacing: 2px; }
+        .footer-col a { font-size: 14px; color: var(--text-secondary); transition: color 0.2s; }
+        .footer-col a:hover { color: var(--accent); }
+        .footer-divider { width: 100%; height: 1px; background: var(--secondary); }
+        .footer-bottom { display: flex; justify-content: space-between; align-items: center; padding: 24px 120px; gap: 16px; }
+        .footer-stats { display: flex; gap: 24px; font-size: 13px; color: var(--text-muted); }
+        .footer-copyright { font-size: 13px; color: var(--text-muted); }
+        @media (max-width: 768px) { .page-wrapper { width: 100%; } .header { padding: 12px 16px; height: auto; flex-wrap: wrap; } .header-nav { gap: 16px; } .hero { padding: 48px 24px 40px; } .hero-title { font-size: 36px; line-height: 44px; } .hero-subtitle { font-size: 20px; line-height: 30px; } .articles { padding: 40px 16px; } .articles-grid { grid-template-columns: 1fr !important; } .section-title { font-size: 26px; } .footer-top { flex-direction: column; padding: 40px 24px; gap: 32px; } .footer-bottom { flex-direction: column; padding: 20px 24px; gap: 12px; text-align: center; } .article-header { padding: 32px 16px 28px; } .header-inner, .content-column { width: 100%; } .article-title { font-size: 30px; line-height: 38px; } .article-body { padding: 32px 16px 60px; } .article-footer { padding: 24px 16px; } .article-footer-inner { width: 100%; flex-wrap: wrap; gap: 12px; } .sticky-nav { padding: 8px 16px; font-size: 13px; } .search-panel { width: 90vw; max-height: 60vh; } .back-to-top { bottom: 20px; right: 20px; width: 40px; height: 40px; } .hero-stats { flex-wrap: wrap; gap: 16px; } .hero-buttons { flex-direction: column; gap: 12px; } .card-thumb { height: 160px; } .card-body { padding: 16px; } .article-card { width: 100%; } .articles-grid { gap: 16px !important; } .footer-nav { flex-wrap: wrap; gap: 32px; } .footer { width: 100%; } .comparison-box { grid-template-columns: 1fr; } }
+        [data-theme="light"] { --bg: #FAFAFA; --surface: #FFFFFF; --surface-alt: #F2F2F2; --primary: #F5F5F5; --secondary: #E4E4E7; --border: #E4E4E7; --border-subtle: #E4E4E7; --text: #09090B; --text-secondary: #52525B; --text-muted: #71717A; --text-subtle: #8A8A8A; }
+        .search-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 10000; display: none; align-items: flex-start; justify-content: center; padding-top: 120px; }
+        .search-overlay.open { display: flex; }
+        .search-panel { background: var(--surface); border: 1px solid var(--border); width: 560px; max-height: 480px; overflow-y: auto; display: flex; flex-direction: column; }
+        .search-input-wrap { display: flex; align-items: center; padding: 20px 24px; border-bottom: 1px solid var(--border); gap: 12px; }
+        .search-input-wrap input { flex: 1; background: none; border: none; outline: none; font-size: 18px; color: var(--text); font-family: var(--font-sans); }
+        .search-input-wrap input::placeholder { color: var(--text-muted); }
+        .search-input-wrap button { background: none; border: none; font-size: 18px; color: var(--text-muted); cursor: pointer; padding: 4px; }
+        .search-results { display: flex; flex-direction: column; }
+        .search-result { display: flex; flex-direction: column; gap: 4px; padding: 16px 24px; border-bottom: 1px solid var(--border-subtle); cursor: pointer; transition: background 0.15s; }
+        .search-result:hover { background: var(--surface-alt); }
+        .search-result-title { font-size: 16px; font-weight: 600; color: var(--text); font-family: var(--font-serif); }
+        .search-result-title em { color: var(--accent); font-style: normal; }
+        .search-result-excerpt { font-size: 13px; color: var(--text-muted); line-height: 20px; }
+        .search-empty { padding: 40px 24px; text-align: center; color: var(--text-muted); font-size: 15px; }</style>
+</head>
+<body>
+<div class="search-overlay" id="searchOverlay">
+<div class="search-panel">
+<div class="search-input-wrap"><input type="text" id="searchInput" placeholder="搜索文章... (Ctrl+K 快捷键)" autocomplete="off"><button onclick="document.getElementById('searchOverlay').classList.remove('open')">✕</button></div>
+<div class="search-results" id="searchResults"></div>
+</div></div>
+<div class="progress-bar" id="progressBar"></div>
+<div class="back-to-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</div>
+<div class="page-wrapper">
+<header class="header">
+<a href="index.html" class="header-logo">Jason's Knowledge</a>
+<nav class="header-nav">
+<a href="index.html">首页</a><a href="categories.html">分类</a><a href="archive.html" class="active">归档</a><a href="about.html">关于</a>
+</nav>
+<div class="header-right"><button id="searchBtn" title="搜索 (Ctrl+K)">🔍</button><button id="themeBtn" title="切换主题">🌙</button></div>
+</header>
+<section class="hero" style="padding:60px 120px 40px;">
+<div class="hero-badge"><span class="hero-badge-dot"></span><span class="hero-badge-text">归档 · 图谱</span></div>
+<h1 class="hero-title" style="font-size:48px;line-height:60px;">图谱</h1>
+<p class="hero-desc">勤学、多思、严谨、进取 · 31 篇短思札记</p>
+<div class="hero-stats"><span>📝 31 篇文章</span></div>
+</section>
+<section class="articles"><div class="articles-grid"><a href="articles/一个很好的人为什么会突然离开.html" class="article-card"><div class="card-thumb" style="background:linear-gradient(135deg, #18181C, #401A4D);"><span class="card-thumb-label">好人</span></div><div class="card-body"><span class="card-category">图谱</span><h3 class="card-title">一个很好的人，为什么会突然离开</h3><p class="card-excerpt">好人不长寿，祸害活千年</p><span class="card-date">2026-06-04</span></div></a>
+<a href="articles/三代之间必降兴家之子.html" class="article-card"><div class="card-thumb" style="background:linear-gradient(135deg, #0F2659, #050F2E);"><span class="card-thumb-label">兴家</span></div><div class="card-body"><span class="card-category">图谱</span><h3 class="card-title">三代之间必降兴家之子</h3><p class="card-excerpt">每一个家族的翻身</p><span class="card-date">2026-05-30</span></div></a>
+<a href="articles/三观是什么.html" class="article-card"><div class="card-thumb" style="background:linear-gradient(135deg, #140D40, #050314);"><span class="card-thumb-label">三观</span></div><div class="card-body"><span class="card-category">图谱</span><h3 class="card-title">三观是什么</h3><p class="card-excerpt">你读过的书，走过的路，见过的人，就是你的世界观，一个人的世界观，由他</p><span class="card-date">2026-05-30</span></div></a>
+<a href="articles/世界的本质.html" class="article-card"><div class="card-thumb" style="background:linear-gradient(135deg, #0A2E33, #03141E);"><span class="card-thumb-label">世界</span></div><div class="card-body"><span class="card-category">图谱</span><h3 class="card-title">世界的本质</h3><p class="card-excerpt">确定论</p><span class="card-date">2026-05-30</span></div></a>
+<a href="articles/人不可能每一步都正确.html" class="article-card"><div class="card-thumb" style="background:linear-gradient(135deg, #331F0A, #1A0D03);"><span class="card-thumb-label">醒悟</span></div><div class="card-body"><span class="card-category">图谱</span><h3 class="card-title">人不可能每一步都正确</h3><p class="card-excerpt">我们不能站在现在的高度</p><span class="card-date">2026-06-03</span></div></a>
+<a href="articles/人和人关系的本质是什么.html" class="article-card"><div class="card-thumb" style="background:linear-gradient(135deg, #212129, #0D0D12);"><span class="card-thumb-label">人际</span></div><div class="card-body"><span class="card-category">图谱</span><h3 class="card-title">人和人关系的本质是什么</h3><p class="card-excerpt">价值交换</p><span class="card-date">2026-05-30</span></div></a>
+<a href="articles/人在什么时候进步最快.html" class="article-card"><div class="card-thumb" style="background:linear-gradient(135deg, #1A0F2E, #08031A);"><span class="card-thumb-label">成长</span></div><div class="card-body"><span class="card-category">图谱</span><h3 class="card-title">人在什么时候进步最快</h3><p class="card-excerpt">一个人进步最快的时候，是他失去安全感的时候</p><span class="card-date">2026-05-30</span></div></a>
+<a href="articles/人生的本质.html" class="article-card"><div class="card-thumb" style="background:linear-gradient(135deg, #0F1A2E, #030A15);"><span class="card-thumb-label">人生</span></div><div class="card-body"><span class="card-category">图谱</span><h3 class="card-title">人生的本质</h3><p class="card-excerpt">2024年，英伟达创始人黄仁勋在斯坦福大学的一场演讲中说：</p><span class="card-date">2026-06-03</span></div></a>
+<a href="articles/人生的运气.html" class="article-card"><div class="card-thumb" style="background:linear-gradient(135deg, #2E1A0A, #150D03);"><span class="card-thumb-label">运气</span></div><div class="card-body"><span class="card-category">图谱</span><h3 class="card-title">人生的运气</h3><p class="card-excerpt">一个人，和他一生所从事工作的相遇</p><span class="card-date">2026-05-30</span></div></a>
+<a href="articles/什么叫开悟.html" class="article-card"><div class="card-thumb" style="background:linear-gradient(135deg, #1A1A0F, #0D0D05);"><span class="card-thumb-label">开悟</span></div><div class="card-body"><span class="card-category">图谱</span><h3 class="card-title">什么叫开悟</h3><p class="card-excerpt">如果一个人能够发现自己身上的种种缺点</p><span class="card-date">2026-05-30</span></div></a>
+<a href="articles/什么时候才能大彻大悟.html" class="article-card"><div class="card-thumb" style="background:linear-gradient(135deg, #0F2E1A, #05150D);"><span class="card-thumb-label">觉悟</span></div><div class="card-body"><span class="card-category">图谱</span><h3 class="card-title">什么时候才能大彻大悟</h3><p class="card-excerpt">无人可依的时候</p><span class="card-date">2026-05-30</span></div></a>
+<a href="articles/什么是命运.html" class="article-card"><div class="card-thumb" style="background:linear-gradient(135deg, #2E0A1A, #15030D);"><span class="card-thumb-label">命运</span></div><div class="card-body"><span class="card-category">图谱</span><h3 class="card-title">什么是命运</h3><p class="card-excerpt">当你遇见一件事</p><span class="card-date">2026-06-03</span></div></a>
+<a href="articles/县城真相世袭与垄断下的底层困局.html" class="article-card"><div class="card-thumb" style="background:linear-gradient(135deg, #0A1A2E, #030D15);"><span class="card-thumb-label">困局</span></div><div class="card-body"><span class="card-category">图谱</span><h3 class="card-title">县城真相：世袭与垄断下的底层困局</h3><p class="card-excerpt">一线城市的打工者中流传着一种格外刺耳的声音，他们认为，只要逃离了北上广深的内卷，回到看似安逸的县城，就能抬头做人，当个有头有脸的人物</p><span class="card-date">2026-06-04</span></div></a>
+<a href="articles/后半句是精华.html" class="article-card"><div class="card-thumb" style="background:linear-gradient(135deg, #1A2E0F, #0D1505);"><span class="card-thumb-label">后半</span></div><div class="card-body"><span class="card-category">图谱</span><h3 class="card-title">后半句是精华</h3><p class="card-excerpt">不听老人言，吃亏在眼前；尽信老人言，终身未向前</p><span class="card-date">2026-05-30</span></div></a>
+<a href="articles/处世法则27条.html" class="article-card"><div class="card-thumb" style="background:linear-gradient(135deg, #2E0F1A, #15030D);"><span class="card-thumb-label">法则</span></div><div class="card-body"><span class="card-category">图谱</span><h3 class="card-title">处世法则27条</h3><p class="card-excerpt">1. 别轻易同情任何人，很多看似可怜的人，身上都藏着让人无奈的性格与选择。  
+2. 跟你翻过脸、坑过你的人，不管关系多近，都别再回到从前。伤害过一次的人，很容易再伤你第二次。  
+3. 层次差距太大</p><span class="card-date">2026-05-30</span></div></a>
+<a href="articles/如何有底气.html" class="article-card"><div class="card-thumb" style="background:linear-gradient(135deg, #0A2E1A, #03150D);"><span class="card-thumb-label">底气</span></div><div class="card-body"><span class="card-category">图谱</span><h3 class="card-title">如何有底气？</h3><p class="card-excerpt">一个人在社会上，怎样才算有底气？</p><span class="card-date">2026-06-04</span></div></a>
+<a href="articles/婚姻是什么.html" class="article-card"><div class="card-thumb" style="background:linear-gradient(135deg, #1A0A2E, #0D0315);"><span class="card-thumb-label">婚姻</span></div><div class="card-body"><span class="card-category">图谱</span><h3 class="card-title">婚姻是什么</h3><p class="card-excerpt">一个七十多岁的老人说，“婚姻就是我午夜三点醒来的时候，口渴或者伤口疼，我只需要捅捅睡在旁边的那个人，她就知道，我要喝水”</p><span class="card-date">2026-06-04</span></div></a>
+<a href="articles/寒门难出贵子.html" class="article-card"><div class="card-thumb" style="background:linear-gradient(135deg, #2E1A0F, #150D03);"><span class="card-thumb-label">逆袭</span></div><div class="card-body"><span class="card-category">图谱</span><h3 class="card-title">寒门难出贵子</h3><p class="card-excerpt">寒门立志</p><span class="card-date">2026-05-30</span></div></a>
+<a href="articles/当滤镜褪去吸引力的反思.html" class="article-card"><div class="card-thumb" style="background:linear-gradient(135deg, #0A0A2E, #030315);"><span class="card-thumb-label">真实</span></div><div class="card-body"><span class="card-category">图谱</span><h3 class="card-title">当滤镜褪去：吸引力的反思</h3><p class="card-excerpt">当一个男人真正挣脱性欲带来的执念与滤镜，不再被原始冲动裹挟着审视异性，便会恍然惊觉：世间绝大多数女性，除去皮囊带来的视觉吸引，并无太多值得过度追捧的光环</p><span class="card-date">2026-06-04</span></div></a>
+<a href="articles/待人接物的礼仪.html" class="article-card"><div class="card-thumb" style="background:linear-gradient(135deg, #2E0A0A, #150303);"><span class="card-thumb-label">礼仪</span></div><div class="card-body"><span class="card-category">图谱</span><h3 class="card-title">待人接物的礼仪</h3><p class="card-excerpt">左手戴金，右手戴银，背后教妻，当面教子</p><span class="card-date">2026-05-30</span></div></a>
+<a href="articles/所有事情的第一核心.html" class="article-card"><div class="card-thumb" style="background:linear-gradient(135deg, #0A2E2E, #031515);"><span class="card-thumb-label">核心</span></div><div class="card-body"><span class="card-category">图谱</span><h3 class="card-title">所有事情的第一核心</h3><p class="card-excerpt">1. 家庭的第一核心，是经济，而不是感情。经济基础直接决定家庭的安稳度，光靠情绪维系，终究很难扛住现实的风雨。 
+
+2. 职场的第一准则，是价值，而不是努力。只懂埋头苦干却不提升核心竞争力，很容易被替</p><span class="card-date">2026-06-04</span></div></a>
+<a href="articles/最顶级的亲子关系是什么.html" class="article-card"><div class="card-thumb" style="background:linear-gradient(135deg, #2E2E0A, #151503);"><span class="card-thumb-label">亲子</span></div><div class="card-body"><span class="card-category">图谱</span><h3 class="card-title">最顶级的亲子关系是什么</h3><p class="card-excerpt">成为孩子背后的山</p><span class="card-date">2026-05-30</span></div></a>
+<a href="articles/毛选解析和任何人搞好关系的三个模型.html" class="article-card"><div class="card-thumb" style="background:linear-gradient(135deg, #1A2E2E, #0D1515);"><span class="card-thumb-label">兵法</span></div><div class="card-body"><span class="card-category">图谱</span><h3 class="card-title">毛选解析：和任何人搞好关系的三个模型</h3><p class="card-excerpt">半个月前，北京。一位研究了一辈子《毛选》的前辈，在海淀他家的书房里给我上了这辈子最重要的一课。</p><span class="card-date">2026-06-04</span></div></a>
+<a href="articles/男人该有的样子.html" class="article-card"><div class="card-thumb" style="background:linear-gradient(135deg, #2E1A2E, #150D15);"><span class="card-thumb-label">气度</span></div><div class="card-body"><span class="card-category">图谱</span><h3 class="card-title">男人该有的样子</h3><p class="card-excerpt">慢热 沉默 抽烟 小酌，喜欢独处，半点斯文，半点鲁莽，不猥琐</p><span class="card-date">2026-05-30</span></div></a>
+<a href="articles/真正的孝心是什么.html" class="article-card"><div class="card-thumb" style="background:linear-gradient(135deg, #0A1A1A, #030D0D);"><span class="card-thumb-label">孝道</span></div><div class="card-body"><span class="card-category">图谱</span><h3 class="card-title">真正的孝心是什么</h3><p class="card-excerpt">前三十年，看父敬子</p><span class="card-date">2026-05-30</span></div></a>
+<a href="articles/线性思维与非线性.html" class="article-card"><div class="card-thumb" style="background:linear-gradient(135deg, #1A1A2E, #0D0D15);"><span class="card-thumb-label">思维</span></div><div class="card-body"><span class="card-category">图谱</span><h3 class="card-title">线性思维与非线性</h3><p class="card-excerpt">**线性思维**与**非线性思维**在赚钱认知上的根本差异：</p><span class="card-date">2026-06-04</span></div></a>
+<a href="articles/结局重要还是过程重要.html" class="article-card"><div class="card-thumb" style="background:linear-gradient(135deg, #2E2E1A, #15150D);"><span class="card-thumb-label">过程</span></div><div class="card-body"><span class="card-category">图谱</span><h3 class="card-title">结局重要还是过程重要</h3><p class="card-excerpt">结局已定，就好好做过程</p><span class="card-date">2026-05-30</span></div></a>
+<a href="articles/诗词一去不返的青春.html" class="article-card"><div class="card-thumb" style="background:linear-gradient(135deg, #0A0A1A, #03030D);"><span class="card-thumb-label">青春</span></div><div class="card-body"><span class="card-category">图谱</span><h3 class="card-title">诗词：一去不返的青春</h3><p class="card-excerpt">春风若有怜花意，可否许我再少年</p><span class="card-date">2026-05-30</span></div></a>
+<a href="articles/跟过大佬后职场斗争的四层认知颠覆.html" class="article-card"><div class="card-thumb" style="background:linear-gradient(135deg, #1A0A0A, #0D0303);"><span class="card-thumb-label">职场</span></div><div class="card-body"><span class="card-category">图谱</span><h3 class="card-title">跟过大佬后：职场斗争的四层认知颠覆</h3><p class="card-excerpt">跟过真正的大佬后，才意识到职场斗争的残酷</p><span class="card-date">2026-06-04</span></div></a>
+<a href="articles/顶级家族培养儿子的总结.html" class="article-card"><div class="card-thumb" style="background:linear-gradient(135deg, #0A1A0A, #030D03);"><span class="card-thumb-label">培养</span></div><div class="card-body"><span class="card-category">图谱</span><h3 class="card-title">顶级家族培养儿子的总结</h3><p class="card-excerpt">男孩和女孩，从出生那天起，就注定了不同的培养路径：</p><span class="card-date">2026-06-04</span></div></a>
+<a href="articles/高情商说话.html" class="article-card"><div class="card-thumb" style="background:linear-gradient(135deg, #1A2E1A, #0D150D);"><span class="card-thumb-label">沟通</span></div><div class="card-body"><span class="card-category">图谱</span><h3 class="card-title">高情商说话</h3><p class="card-excerpt">只需要记住一点</p><span class="card-date">2026-05-30</span></div></a></div></section>
+<footer class="footer">
+<div class="footer-top">
+<div class="footer-brand"><span class="footer-logo">Jason's Knowledge</span><p class="footer-tagline">三代之间必降兴家之子</p><p class="footer-quote">莫愁前路无知己，天下谁人不识君</p></div>
+<div class="footer-nav">
+<div class="footer-col"><span class="footer-col-title">分类</span><a href="categories.html">Wiki</a><a href="categories.html">图谱</a></div>
+<div class="footer-col"><span class="footer-col-title">导航</span><a href="archive.html">全部文章</a><a href="about.html">关于本站</a></div>
+</div></div>
+<div class="footer-divider"></div>
+<div class="footer-bottom"><div class="footer-stats"><span>📝 31 篇文章</span><span>📅 2026</span></div><p class="footer-copyright">© 2026 Jason · Obsidian &amp; WorkBuddy</p></div>
+</footer>
+</div>
+<script>var SEARCH_INDEX=[{"t": "一个很好的人，为什么会突然离开", "e": "好人不长寿，祸害活千年", "u": "articles/一个很好的人为什么会突然离开.html"}, {"t": "三代之间必降兴家之子", "e": "每一个家族的翻身", "u": "articles/三代之间必降兴家之子.html"}, {"t": "三观是什么", "e": "你读过的书，走过的路，见过的人，就是你的世界观，一个人的世界观，由他", "u": "articles/三观是什么.html"}, {"t": "世界的本质", "e": "确定论", "u": "articles/世界的本质.html"}, {"t": "人不可能每一步都正确", "e": "我们不能站在现在的高度", "u": "articles/人不可能每一步都正确.html"}, {"t": "人和人关系的本质是什么", "e": "价值交换", "u": "articles/人和人关系的本质是什么.html"}, {"t": "人在什么时候进步最快", "e": "一个人进步最快的时候，是他失去安全感的时候", "u": "articles/人在什么时候进步最快.html"}, {"t": "人生的本质", "e": "2024年，英伟达创始人黄仁勋在斯坦福大学的一场演讲中说：", "u": "articles/人生的本质.html"}, {"t": "人生的运气", "e": "一个人，和他一生所从事工作的相遇", "u": "articles/人生的运气.html"}, {"t": "什么叫开悟", "e": "如果一个人能够发现自己身上的种种缺点", "u": "articles/什么叫开悟.html"}, {"t": "什么时候才能大彻大悟", "e": "无人可依的时候", "u": "articles/什么时候才能大彻大悟.html"}, {"t": "什么是命运", "e": "当你遇见一件事", "u": "articles/什么是命运.html"}, {"t": "县城真相：世袭与垄断下的底层困局", "e": "一线城市的打工者中流传着一种格外刺耳的声音，他们认为，只要逃离了北上广深的内卷，回到看似安逸的县城，就能抬头做人，当个有头有脸的人物", "u": "articles/县城真相世袭与垄断下的底层困局.html"}, {"t": "后半句是精华", "e": "不听老人言，吃亏在眼前；尽信老人言，终身未向前", "u": "articles/后半句是精华.html"}, {"t": "处世法则27条", "e": "1. 别轻易同情任何人，很多看似可怜的人，身上都藏着让人无奈的性格与选择。  \n2. 跟你翻过脸、坑过你的人，不管关系多近，都别再回到从前。伤害过一次的人，很容易再伤你第二次。  \n3. 层次差距太大", "u": "articles/处世法则27条.html"}, {"t": "如何有底气？", "e": "一个人在社会上，怎样才算有底气？", "u": "articles/如何有底气.html"}, {"t": "婚姻是什么", "e": "一个七十多岁的老人说，“婚姻就是我午夜三点醒来的时候，口渴或者伤口疼，我只需要捅捅睡在旁边的那个人，她就知道，我要喝水”", "u": "articles/婚姻是什么.html"}, {"t": "寒门难出贵子", "e": "寒门立志", "u": "articles/寒门难出贵子.html"}, {"t": "当滤镜褪去：吸引力的反思", "e": "当一个男人真正挣脱性欲带来的执念与滤镜，不再被原始冲动裹挟着审视异性，便会恍然惊觉：世间绝大多数女性，除去皮囊带来的视觉吸引，并无太多值得过度追捧的光环", "u": "articles/当滤镜褪去吸引力的反思.html"}, {"t": "待人接物的礼仪", "e": "左手戴金，右手戴银，背后教妻，当面教子", "u": "articles/待人接物的礼仪.html"}, {"t": "所有事情的第一核心", "e": "1. 家庭的第一核心，是经济，而不是感情。经济基础直接决定家庭的安稳度，光靠情绪维系，终究很难扛住现实的风雨。 \n\n2. 职场的第一准则，是价值，而不是努力。只懂埋头苦干却不提升核心竞争力，很容易被替", "u": "articles/所有事情的第一核心.html"}, {"t": "最顶级的亲子关系是什么", "e": "成为孩子背后的山", "u": "articles/最顶级的亲子关系是什么.html"}, {"t": "毛选解析：和任何人搞好关系的三个模型", "e": "半个月前，北京。一位研究了一辈子《毛选》的前辈，在海淀他家的书房里给我上了这辈子最重要的一课。", "u": "articles/毛选解析和任何人搞好关系的三个模型.html"}, {"t": "男人该有的样子", "e": "慢热 沉默 抽烟 小酌，喜欢独处，半点斯文，半点鲁莽，不猥琐", "u": "articles/男人该有的样子.html"}, {"t": "真正的孝心是什么", "e": "前三十年，看父敬子", "u": "articles/真正的孝心是什么.html"}, {"t": "线性思维与非线性", "e": "**线性思维**与**非线性思维**在赚钱认知上的根本差异：", "u": "articles/线性思维与非线性.html"}, {"t": "结局重要还是过程重要", "e": "结局已定，就好好做过程", "u": "articles/结局重要还是过程重要.html"}, {"t": "诗词：一去不返的青春", "e": "春风若有怜花意，可否许我再少年", "u": "articles/诗词一去不返的青春.html"}, {"t": "跟过大佬后：职场斗争的四层认知颠覆", "e": "跟过真正的大佬后，才意识到职场斗争的残酷", "u": "articles/跟过大佬后职场斗争的四层认知颠覆.html"}, {"t": "顶级家族培养儿子的总结", "e": "男孩和女孩，从出生那天起，就注定了不同的培养路径：", "u": "articles/顶级家族培养儿子的总结.html"}, {"t": "高情商说话", "e": "只需要记住一点", "u": "articles/高情商说话.html"}, {"t": "传承与家族", "e": "**来源：[[顶级家族培养儿子的总结]]**", "u": "articles/传承与家族.html"}, {"t": "处世与自我保护", "e": "**来源：[[处世法则27条]]**", "u": "articles/处世与自我保护.html"}, {"t": "婚姻与亲密关系", "e": "**来源：[[婚姻是什么]]**", "u": "articles/婚姻与亲密关系.html"}, {"t": "接纳与安命", "e": "**来源：[[人生的本质]]**", "u": "articles/接纳与安命.html"}, {"t": "阶层与社会流动", "e": "**来源：[[县城真相：世袭与垄断下的底层困局]]**", "u": "articles/阶层与社会流动.html"}];</script>
+<script>
+(function(){
+    var bar=document.getElementById('progressBar');
+    var btn=document.getElementById('backTop');
+    window.addEventListener('scroll',function(){
+        var h=document.documentElement.scrollHeight-document.documentElement.clientHeight;
+        var p=h>0?Math.min(100,Math.round(window.scrollY/h*100)):0;
+        bar.style.width=p+'%';
+        btn.classList.toggle('visible',window.scrollY>400);
+    });
+    var theme=localStorage.getItem('theme')||'dark';
+    document.documentElement.setAttribute('data-theme',theme);
+    var themeBtn=document.getElementById('themeBtn');
+    if(themeBtn){ themeBtn.textContent=theme==='dark'?'☀️':'🌙'; themeBtn.onclick=function(){ theme=theme==='dark'?'light':'dark'; document.documentElement.setAttribute('data-theme',theme); localStorage.setItem('theme',theme); themeBtn.textContent=theme==='dark'?'☀️':'🌙'; }; }
+    var searchBtn=document.getElementById('searchBtn');
+    var searchOverlay=document.getElementById('searchOverlay');
+    var searchInput=document.getElementById('searchInput');
+    var searchResults=document.getElementById('searchResults');
+    if(searchBtn&&searchOverlay){
+        searchBtn.onclick=function(){ searchOverlay.classList.add('open'); searchInput.focus(); };
+        searchOverlay.addEventListener('click',function(e){ if(e.target===searchOverlay)searchOverlay.classList.remove('open'); });
+        document.addEventListener('keydown',function(e){ if(e.key==='Escape')searchOverlay.classList.remove('open'); if((e.ctrlKey||e.metaKey)&&e.key==='k'){ e.preventDefault(); searchOverlay.classList.add('open'); searchInput.focus(); } });
+    }
+    if(searchInput){
+        searchInput.addEventListener('input',function(){
+            var q=searchInput.value.trim().toLowerCase();
+            searchResults.innerHTML='';
+            if(!q)return;
+            var hits=[];
+            for(var i=0;i<SEARCH_INDEX.length;i++){
+                var item=SEARCH_INDEX[i];
+                var score=0;
+                if(item.t.toLowerCase().indexOf(q)>=0)score+=3;
+                if(item.e.toLowerCase().indexOf(q)>=0)score+=1;
+                if(score>0)hits.push({item:item,score:score});
+            }
+            hits.sort(function(a,b){return b.score-a.score;});
+            if(hits.length===0){ searchResults.innerHTML='<div class="search-empty">没有找到匹配的文章</div>'; return; }
+            for(var j=0;j<Math.min(hits.length,12);j++){
+                var h=hits[j].item;
+                var div=document.createElement('div');
+                div.className='search-result';
+                div.innerHTML='<span class="search-result-title">'+h.t.replace(new RegExp('('+q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','gi'),'<em>$1</em>')+'</span><span class="search-result-excerpt">'+h.e.substring(0,120)+'</span>';
+                div.onclick=function(url){return function(){window.location.href=url;};}(h.u);
+                searchResults.appendChild(div);
+            }
+        });
+    }
+})();
+</script>
+</body></html>

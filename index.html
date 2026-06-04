@@ -47,8 +47,9 @@
         .articles-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
         .article-card { display: flex; flex-direction: column; background: var(--surface); border: 1px solid var(--secondary); overflow: hidden; transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s ease, border-color 0.3s; color: inherit; }
         .article-card:hover { transform: translateY(-6px); box-shadow: 0 12px 40px rgba(236,72,153,0.15); border-color: var(--accent); }
-        .card-thumb { height: 200px; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative; background-size: cover; background-position: center; }
-        .card-thumb::before { content: ''; position: absolute; inset: 0; background: rgba(0,0,0,0.25); z-index: 0; }
+        .card-thumb { height: 200px; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative; }
+        .card-thumb-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
+        .card-thumb::before { content: ''; position: absolute; inset: 0; background: rgba(0,0,0,0.25); z-index: 1; }
         .card-thumb::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.5), transparent); opacity: 0; transition: opacity 0.3s; z-index: 1; }
         .article-card:hover .card-thumb::after { opacity: 1; }
         .card-thumb-label { font-family: var(--font-serif); font-size: 24px; font-weight: 700; color: #fff; text-shadow: 0 2px 12px rgba(0,0,0,0.7); position: relative; z-index: 2; transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1); }
@@ -122,29 +123,29 @@
 <div class="section-header"><h2 class="section-title">最新更新</h2><p class="section-subtitle">勤学、多思、严谨、进取</p></div>
 <div class="articles-grid">
                 <a href="一个很好的人为什么会突然离开.html" class="article-card">
-                    <div class="card-thumb" style="background: url('card-cover.jpg') no-repeat center; background-size: cover;"><span class="card-thumb-label">好人</span></div>
+                    <div class="card-thumb"><img src="card-cover.jpg" class="card-thumb-img" alt=""><span class="card-thumb-label">好人</span></div>
                     <div class="card-body"><span class="card-category">图谱</span><h3 class="card-title">一个很好的人，为什么会突然离开</h3><p class="card-excerpt">好人不长寿，祸害活千年</p><span class="card-date">2026-06-04</span></div>
                 </a>
                 <a href="事情的第一核心.html" class="article-card">
-                    <div class="card-thumb" style="background: url('card-cover.jpg') no-repeat center; background-size: cover;"><span class="card-thumb-label">事情</span></div>
+                    <div class="card-thumb"><img src="card-cover.jpg" class="card-thumb-img" alt=""><span class="card-thumb-label">事情</span></div>
                     <div class="card-body"><span class="card-category">图谱</span><h3 class="card-title">事情的第一核心</h3><p class="card-excerpt">1. 家庭的第一核心，是经济，而不是感情。经济基础直接决定家庭的安稳度，光靠情绪维系，终究很难扛住现实的风雨。 
 
 2. 职场的第一准则，是价值，而不是努力。只懂埋头苦干却不提升核心竞争力，很容易被替</p><span class="card-date">2026-06-04</span></div>
                 </a>
                 <a href="人在什么时候进步最快.html" class="article-card">
-                    <div class="card-thumb" style="background: url('card-cover.jpg') no-repeat center; background-size: cover;"><span class="card-thumb-label">成长</span></div>
+                    <div class="card-thumb"><img src="card-cover.jpg" class="card-thumb-img" alt=""><span class="card-thumb-label">成长</span></div>
                     <div class="card-body"><span class="card-category">图谱</span><h3 class="card-title">人在什么时候进步最快</h3><p class="card-excerpt">一个人进步最快的时候</p><span class="card-date">2026-06-04</span></div>
                 </a>
                 <a href="人生的本质.html" class="article-card">
-                    <div class="card-thumb" style="background: url('card-cover.jpg') no-repeat center; background-size: cover;"><span class="card-thumb-label">人生</span></div>
+                    <div class="card-thumb"><img src="card-cover.jpg" class="card-thumb-img" alt=""><span class="card-thumb-label">人生</span></div>
                     <div class="card-body"><span class="card-category">图谱</span><h3 class="card-title">人生的本质</h3><p class="card-excerpt">黄仁勋在斯坦福大学的一场演讲中说：</p><span class="card-date">2026-06-04</span></div>
                 </a>
                 <a href="人生的运气.html" class="article-card">
-                    <div class="card-thumb" style="background: url('card-cover.jpg') no-repeat center; background-size: cover;"><span class="card-thumb-label">运气</span></div>
+                    <div class="card-thumb"><img src="card-cover.jpg" class="card-thumb-img" alt=""><span class="card-thumb-label">运气</span></div>
                     <div class="card-body"><span class="card-category">图谱</span><h3 class="card-title">人生的运气</h3><p class="card-excerpt">一个人</p><span class="card-date">2026-06-04</span></div>
                 </a>
                 <a href="县城真相世袭与垄断下的底层困局.html" class="article-card">
-                    <div class="card-thumb" style="background: url('card-cover.jpg') no-repeat center; background-size: cover;"><span class="card-thumb-label">困局</span></div>
+                    <div class="card-thumb"><img src="card-cover.jpg" class="card-thumb-img" alt=""><span class="card-thumb-label">困局</span></div>
                     <div class="card-body"><span class="card-category">图谱</span><h3 class="card-title">县城真相：世袭与垄断下的底层困局</h3><p class="card-excerpt">一线城市的打工者中流传着一种格外刺耳的声音，他们认为，只要逃离了北上广深的内卷，回到看似安逸的县城，就能抬头做人，当个有头有脸的人物</p><span class="card-date">2026-06-04</span></div>
                 </a>
 </div>

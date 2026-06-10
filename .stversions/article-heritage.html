@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>传承与家族 — Jason's Knowledge</title>
+    <style>
+        :root {
+            --bg: #0A0A0B;
+            --surface: #1A1A1D;
+            --surface-alt: #18181B;
+            --border: #27272A;
+            --border-subtle: #1C1C20;
+            --accent: #EC4899;
+            --accent-hover: #F472B6;
+            --text: #FAFAFA;
+            --text-secondary: #A1A1AA;
+            --text-muted: #71717A;
+            --text-subtle: #8A8A8A;
+            --font-serif: 'Noto Serif TC', 'Source Han Serif CN', 'Songti SC', serif;
+            --font-sans: 'Noto Sans TC', 'Source Han Sans CN', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { font-size: 16px; -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
+        body {
+            font-family: var(--font-sans);
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        a { text-decoration: none; color: inherit; }
+
+        /* === Layout === */
+        .page-wrapper {
+            width: 1440px; margin: 0 auto;
+            transform-origin: top center;
+            background: var(--bg);
+        }
+
+        /* === Article Header === */
+        .article-header {
+            background: var(--surface-alt);
+            padding: 48px 120px 40px;
+            display: flex; justify-content: center;
+        }
+        .header-inner {
+            width: 720px;
+            display: flex; flex-direction: column;
+            align-items: center; gap: 20px;
+            text-align: center;
+        }
+        .back-link {
+            font-size: 14px; color: var(--text-muted);
+            transition: color 0.2s;
+        }
+        .back-link:hover { color: var(--accent); }
+        .cat-badge {
+            display: inline-flex; padding: 4px 14px;
+            background: var(--surface); border-radius: 9999px;
+            font-size: 13px; font-weight: 500;
+            color: var(--accent); letter-spacing: 1px;
+        }
+        .article-title {
+            font-family: var(--font-serif);
+            font-size: 48px; font-weight: 700;
+            color: var(--text); line-height: 60px;
+        }
+        .article-quote-block {
+            display: flex; gap: 16px; align-items: stretch;
+            text-align: left; width: 100%;
+        }
+        .article-quote-line {
+            width: 3px; background: var(--accent);
+            border-radius: 9999px; flex-shrink: 0;
+        }
+        .article-quote-text {
+            font-family: var(--font-serif);
+            font-size: 18px; font-style: italic;
+            color: var(--text-secondary); line-height: 30px;
+        }
+        .article-meta {
+            font-size: 14px; color: #3F3F46;
+            display: flex; gap: 16px; align-items: center;
+        }
+        .article-meta-dot { color: #3F3F46; }
+
+        /* === Article Body === */
+        .article-body {
+            padding: 60px 120px 100px;
+            display: flex; justify-content: center;
+        }
+        .content-column {
+            width: 720px;
+            display: flex; flex-direction: column; gap: 48px;
+        }
+
+        /* === Sections === */
+        .section-label {
+            font-size: 13px; font-weight: 500;
+            color: var(--accent); letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+        .section-heading {
+            font-family: var(--font-serif);
+            font-size: 28px; font-weight: 700;
+            color: var(--text); line-height: 40px;
+        }
+        .section-text {
+            font-size: 16px; color: var(--text-secondary);
+            line-height: 28px;
+        }
+        .section-text strong, .section-text b {
+            color: var(--text);
+        }
+
+        /* === Table === */
+        .article-table {
+            width: 100%; border-collapse: collapse;
+            background: var(--surface); border: 1px solid var(--border);
+        }
+        .article-table thead { background: var(--surface-alt); }
+        .article-table th {
+            padding: 14px 24px; text-align: left;
+            font-size: 13px; font-weight: 700;
+            color: var(--accent); letter-spacing: 1px;
+            border-bottom: 1px solid var(--border);
+        }
+        .article-table th:first-child { width: 100px; }
+        .article-table th:nth-child(2) { width: 120px; }
+        .article-table td {
+            padding: 14px 24px;
+            font-size: 14px; color: var(--text-secondary);
+            border-bottom: 1px solid var(--border-subtle);
+        }
+        .article-table td:first-child {
+            font-weight: 500; color: var(--text);
+        }
+        .article-table tr:last-child td { border-bottom: none; }
+
+        /* === Highlight Box === */
+        .highlight-box {
+            display: flex; gap: 20px;
+            background: var(--surface-alt);
+            padding: 28px;
+            border-left: 4px solid var(--accent);
+        }
+        .highlight-icon {
+            font-size: 24px; color: var(--accent);
+            flex-shrink: 0; line-height: 1;
+        }
+        .highlight-content {
+            display: flex; flex-direction: column; gap: 12px;
+        }
+        .highlight-title {
+            font-family: var(--font-serif);
+            font-size: 24px; font-weight: 700;
+            color: var(--text); line-height: 34px;
+        }
+        .highlight-text {
+            font-size: 16px; color: var(--text-secondary);
+            line-height: 28px;
+        }
+        .highlight-quote {
+            font-family: var(--font-serif);
+            font-size: 15px; font-style: italic;
+            color: var(--text-subtle); line-height: 24px;
+            padding-top: 4px;
+        }
+
+        /* === Comparison Box === */
+        .comparison-box {
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 0; background: var(--surface);
+        }
+        .comp-left, .comp-right {
+            padding: 28px; display: flex;
+            flex-direction: column; gap: 12px;
+            border: 1px solid var(--border-subtle);
+        }
+        .comp-tag {
+            font-size: 13px; font-weight: 700;
+            letter-spacing: 2px;
+        }
+        .comp-left .comp-tag { color: var(--accent); }
+        .comp-right .comp-tag { color: var(--text-muted); }
+        .comp-text {
+            font-size: 15px; line-height: 24px;
+        }
+        .comp-left .comp-text { color: var(--text-secondary); }
+        .comp-right .comp-text { color: var(--text-muted); }
+
+        /* === Key Insight === */
+        .key-insight {
+            background: var(--surface); padding: 28px;
+            display: flex; flex-direction: column; gap: 8px;
+            border: 1px solid var(--border);
+        }
+        .key-insight-label {
+            font-size: 12px; font-weight: 700;
+            color: var(--accent); letter-spacing: 2px;
+        }
+        .key-insight-text {
+            font-family: var(--font-serif);
+            font-size: 18px; font-weight: 600;
+            color: var(--text); line-height: 30px;
+        }
+
+        /* === Related Notes Table === */
+        .related-table {
+            width: 100%; border-collapse: collapse;
+            background: var(--surface); border: 1px solid var(--border);
+        }
+        .related-table thead { background: var(--surface-alt); }
+        .related-table th {
+            padding: 14px 24px; text-align: left;
+            font-size: 13px; font-weight: 700;
+            color: var(--text); letter-spacing: 1px;
+            border-bottom: 1px solid var(--border);
+        }
+        .related-table th:last-child { width: 140px; }
+        .related-table td {
+            padding: 14px 24px;
+            font-size: 14px; color: var(--text-secondary);
+            border-bottom: 1px solid var(--border-subtle);
+        }
+        .related-table td:first-child {
+            font-weight: 500; color: var(--accent);
+        }
+        .related-table tr:last-child td { border-bottom: none; }
+        .related-table .note-dim {
+            font-size: 12px; color: var(--text-muted);
+        }
+
+        /* === Contradictions List === */
+        .issue-list {
+            display: flex; flex-direction: column; gap: 12px;
+        }
+        .issue-item {
+            display: flex; gap: 12px; align-items: flex-start;
+            font-size: 15px; color: var(--text-secondary);
+            line-height: 24px;
+        }
+        .issue-marker {
+            color: var(--accent); flex-shrink: 0;
+            font-weight: 700;
+        }
+
+        /* === Reading List === */
+        .reading-list {
+            display: flex; flex-direction: column; gap: 10px;
+            font-size: 15px; color: var(--text-secondary);
+            line-height: 24px;
+        }
+        .reading-item {
+            display: flex; gap: 10px;
+        }
+        .reading-dot {
+            color: var(--text-muted); flex-shrink: 0;
+        }
+
+        /* === Footer (simple) === */
+        .article-footer {
+            border-top: 1px solid var(--border);
+            padding: 32px 120px;
+            display: flex; justify-content: center;
+        }
+        .article-footer-inner {
+            width: 720px; display: flex;
+            justify-content: space-between; align-items: center;
+        }
+        .article-footer a {
+            font-size: 14px; color: var(--text-muted);
+            transition: color 0.2s;
+        }
+        .article-footer a:hover { color: var(--accent); }
+
+        @media (max-width: 1440px) {
+            .page-wrapper { transform: scale(calc(100vw / 1440)); }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-wrapper">
+
+        <!-- Article Header -->
+        <header class="article-header">
+            <div class="header-inner">
+                <a href="index.html" class="back-link">← 返回首页</a>
+                <span class="cat-badge">Wiki · 传承与家族</span>
+                <h1 class="article-title">传承与家族</h1>
+                <div class="article-quote-block">
+                    <div class="article-quote-line"></div>
+                    <p class="article-quote-text">
+                        传承不只是财富的传递，更是品格、能力和价值观的代际接力。「勤学、多思、严谨、进取」是贯穿这个主题的八字真言。
+                    </p>
+                </div>
+                <div class="article-meta">
+                    <span>Jason</span>
+                    <span class="article-meta-dot">·</span>
+                    <span>2026-06-04</span>
+                    <span class="article-meta-dot">·</span>
+                    <span>约 1,200 字</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Article Body -->
+        <main class="article-body">
+            <div class="content-column">
+
+                <!-- Section Label -->
+                <div style="display:flex;flex-direction:column;gap:4px;">
+                    <span class="section-label">核心观点</span>
+                </div>
+
+                <!-- Section 1: 九阶段体系 -->
+                <h2 class="section-heading">1. 男孩培养九阶段体系</h2>
+                <p class="section-text">
+                    这套体系来自对顶级家族培养后代方式的观察总结，从 0 岁到成年后共九个阶段，每个阶段有明确的核心任务。
+                </p>
+
+                <table class="article-table">
+                    <thead>
+                        <tr><th>阶段</th><th>年龄</th><th>核心任务</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>护阳</td><td>0-3岁</td><td>保护天性活力</td></tr>
+                        <tr><td>炼骨</td><td>3-7岁</td><td>建立规则意识、体能基础</td></tr>
+                        <tr><td>铸魂</td><td>7-12岁</td><td>价值观塑造、品格培养</td></tr>
+                        <tr><td>开眼</td><td>12-15岁</td><td>见识世界、建立格局</td></tr>
+                        <tr><td>定心</td><td>15-18岁</td><td>情绪管理、目标确立</td></tr>
+                        <tr><td>破局</td><td>18-22岁</td><td>独立闯荡、突破原生局限</td></tr>
+                        <tr><td>藏器</td><td>22岁+</td><td>隐忍蓄力、等待时机</td></tr>
+                        <tr><td>择道</td><td>—</td><td>选择人生方向</td></tr>
+                        <tr><td>守门</td><td>—</td><td>守住家族根基</td></tr>
+                    </tbody>
+                </table>
+
+                <div class="key-insight">
+                    <span class="key-insight-label">核心结论</span>
+                    <p class="key-insight-text">阳刚之气是「炼」出来的，不是「教」出来的。</p>
+                </div>
+
+                <!-- Section 2: 八字真言 -->
+                <div class="highlight-box">
+                    <span class="highlight-icon">✦</span>
+                    <div class="highlight-content">
+                        <h3 class="highlight-title">2. 传承的八字真言</h3>
+                        <p class="highlight-text">
+                            「勤学、多思、严谨、进取」是 Jason 的核心信条。<br>
+                            2025-07-15 与 2026-05-20 两篇日记中完全一致——时隔一年，初心不改。
+                        </p>
+                        <p class="highlight-quote">
+                            "人活着的意义就在于传承——把自己的优秀品质传承给下一代，把家族的血脉和精神传承下去"
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Section 3: 底层对比 -->
+                <h2 class="section-heading">3. 底层家庭传承的残酷现实</h2>
+                <p class="section-text">
+                    与顶级家族形成鲜明对比——顶层有体系、有资源、有人兜底，底层家庭只能孤注一掷。
+                </p>
+
+                <div class="comparison-box">
+                    <div class="comp-left">
+                        <span class="comp-tag">顶级家族</span>
+                        <p class="comp-text">有体系、有资源、有人兜底<br>→ 九阶段培养体系</p>
+                    </div>
+                    <div class="comp-right">
+                        <span class="comp-tag">底层家庭</span>
+                        <p class="comp-text">没有体系、没有资源、孤注一掷<br>→ 献祭一个天才</p>
+                    </div>
+                </div>
+
+                <!-- Section 4: 经济基础 -->
+                <h2 class="section-heading">4. 经济基础是传承的前提</h2>
+                <p class="section-text">
+                    存钱、提升能力、为下一代铺路 —— 三件事顺序清晰：<strong>先稳住自己，再谈传承</strong>。
+                </p>
+
+                <!-- 关联笔记 -->
+                <h2 class="section-heading">关联笔记</h2>
+                <table class="related-table">
+                    <thead>
+                        <tr><th>笔记</th><th>摘要</th><th>关联维度</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>顶级家族培养儿子的总结</td>
+                            <td>九阶段培养体系</td>
+                            <td>方法论</td>
+                        </tr>
+                        <tr>
+                            <td>三代之间必降兴家之子</td>
+                            <td>底层家庭翻身的代价</td>
+                            <td>现实对照</td>
+                        </tr>
+                        <tr>
+                            <td>2026-05-20</td>
+                            <td>⭐ 传承主题 + 八字真言</td>
+                            <td>核心理念</td>
+                        </tr>
+                        <tr>
+                            <td>2025-07-15</td>
+                            <td><span class="note-dim">⚠️ 与05-20重复</span></td>
+                            <td>核心理念（重复）</td>
+                        </tr>
+                        <tr>
+                            <td>2026-05-26</td>
+                            <td>存钱、提升、铺路</td>
+                            <td>现实路径</td>
+                        </tr>
+                        <tr>
+                            <td>男人该有的样子</td>
+                            <td>两种气场融合：儒雅+锋芒</td>
+                            <td>培养目标</td>
+                        </tr>
+                        <tr>
+                            <td>最顶级的亲子关系是什么</td>
+                            <td>成为孩子背后的山</td>
+                            <td>亲子立场</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <!-- 矛盾与待解 -->
+                <h2 class="section-heading">矛盾与待解</h2>
+                <div class="issue-list">
+                    <div class="issue-item">
+                        <span class="issue-marker">?</span>
+                        <span>九阶段体系的原始出处？是网络文章、某本书还是个人整理——需要标注来源。</span>
+                    </div>
+                    <div class="issue-item">
+                        <span class="issue-marker">⚠</span>
+                        <span>2025-07-15 与 2026-05-20 的八字完全一致，建议保留 05-20（更详细），归档 07-15。</span>
+                    </div>
+                    <div class="issue-item">
+                        <span class="issue-marker">?</span>
+                        <span>当前笔记偏向男性后代传承视角——缺少关于女儿的传承讨论。</span>
+                    </div>
+                    <div class="issue-item">
+                        <span class="issue-marker">+</span>
+                        <span>「男人该有的样子」中「雅致其表、锋芒其里」是九阶段体系的"成品"描述——前者说怎么炼，后者说炼成什么样。</span>
+                    </div>
+                    <div class="issue-item">
+                        <span class="issue-marker">+</span>
+                        <span>「最顶级的亲子关系」中「成为孩子背后的山」补充了体系缺失的情感维度——体系教你做什么，山告诉你以什么身份做。</span>
+                    </div>
+                </div>
+
+                <!-- 建议新摄入 -->
+                <h2 class="section-heading">建议新摄入</h2>
+                <div class="reading-list">
+                    <div class="reading-item">
+                        <span class="reading-dot">📖</span>
+                        <span>关于家族传承的经典书籍（如《洛克菲勒给儿子的38封信》）</span>
+                    </div>
+                    <div class="reading-item">
+                        <span class="reading-dot">📖</span>
+                        <span>中国传统家训（如《颜氏家训》《朱子家训》）</span>
+                    </div>
+                    <div class="reading-item">
+                        <span class="reading-dot">📖</span>
+                        <span>现代家庭教育心理学研究</span>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="article-footer">
+            <div class="article-footer-inner">
+                <a href="#">← 上一篇</a>
+                <a href="index.html">回到首页</a>
+                <a href="#">下一篇 →</a>
+            </div>
+        </footer>
+
+    </div>
+</body>
+</html>

@@ -109,7 +109,7 @@
         bar.style.width=p+'%';
         btn.classList.toggle('visible',window.scrollY>400);
     });
-    var theme=localStorage.getItem('theme')||'dark';
+    var theme=localStorage.getItem('theme')||'light';
     document.documentElement.setAttribute('data-theme',theme);
     var themeBtn=document.getElementById('themeBtn');
     if(themeBtn){ themeBtn.textContent=theme==='dark'?'☀️':'🌙'; themeBtn.onclick=function(){ theme=theme==='dark'?'light':'dark'; document.documentElement.setAttribute('data-theme',theme); localStorage.setItem('theme',theme); themeBtn.textContent=theme==='dark'?'☀️':'🌙'; }; }

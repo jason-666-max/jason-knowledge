@@ -1,81 +1,56 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>关于本站 — Jason's Knowledge</title>
-<style>        :root {
-            --bg: #0A0A0B; --surface: #1A1A1D; --primary: #18181B; --secondary: #27272A;
-            --accent: #EC4899; --accent-hover: #F472B6; --text: #FAFAFA;
-            --text-secondary: #A1A1AA; --text-muted: #71717A; --border: #26262A;
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>人在什么时候成长最快 — Jason's Knowledge</title>
+    <style>        :root {
+            --bg: #0A0A0B;
+            --surface: #1A1A1D;
+            --surface-alt: #18181B;
+            --border: #27272A;
+            --border-subtle: #1C1C20;
+            --accent: #EC4899;
+            --accent-hover: #F472B6;
+            --text: #FAFAFA;
+            --text-secondary: #A1A1AA;
+            --text-muted: #71717A;
+            --text-subtle: #8A8A8A;
             --font-serif: 'Noto Serif TC', 'Source Han Serif CN', 'Songti SC', serif;
             --font-sans: 'Noto Sans TC', 'Source Han Sans CN', 'PingFang SC', 'Microsoft YaHei', sans-serif;
             --thumb-gradient-0: linear-gradient(135deg, #18181C, #401A4D); --thumb-gradient-1: linear-gradient(135deg, #0F2659, #050F2E); --thumb-gradient-2: linear-gradient(135deg, #140D40, #050314); --thumb-gradient-3: linear-gradient(135deg, #0A2E33, #03141E); --thumb-gradient-4: linear-gradient(135deg, #331F0A, #1A0D03); --thumb-gradient-5: linear-gradient(135deg, #212129, #0D0D12); --thumb-gradient-6: linear-gradient(135deg, #1A0F2E, #08031A); --thumb-gradient-7: linear-gradient(135deg, #0F1A2E, #030A15); --thumb-gradient-8: linear-gradient(135deg, #2E1A0A, #150D03); --thumb-gradient-9: linear-gradient(135deg, #1A1A0F, #0D0D05); --thumb-gradient-10: linear-gradient(135deg, #0F2E1A, #05150D); --thumb-gradient-11: linear-gradient(135deg, #2E0A1A, #15030D); --thumb-gradient-12: linear-gradient(135deg, #0A1A2E, #030D15); --thumb-gradient-13: linear-gradient(135deg, #1A2E0F, #0D1505); --thumb-gradient-14: linear-gradient(135deg, #2E0F1A, #15030D); --thumb-gradient-15: linear-gradient(135deg, #0A2E1A, #03150D); --thumb-gradient-16: linear-gradient(135deg, #1A0A2E, #0D0315); --thumb-gradient-17: linear-gradient(135deg, #2E1A0F, #150D03); --thumb-gradient-18: linear-gradient(135deg, #0A0A2E, #030315); --thumb-gradient-19: linear-gradient(135deg, #2E0A0A, #150303); --thumb-gradient-20: linear-gradient(135deg, #0A2E2E, #031515); --thumb-gradient-21: linear-gradient(135deg, #2E2E0A, #151503); --thumb-gradient-22: linear-gradient(135deg, #1A2E2E, #0D1515); --thumb-gradient-23: linear-gradient(135deg, #2E1A2E, #150D15); --thumb-gradient-24: linear-gradient(135deg, #0A1A1A, #030D0D); --thumb-gradient-25: linear-gradient(135deg, #1A1A2E, #0D0D15); --thumb-gradient-26: linear-gradient(135deg, #2E2E1A, #15150D); --thumb-gradient-27: linear-gradient(135deg, #0A0A1A, #03030D); --thumb-gradient-28: linear-gradient(135deg, #1A0A0A, #0D0303); --thumb-gradient-29: linear-gradient(135deg, #0A1A0A, #030D03); --thumb-gradient-30: linear-gradient(135deg, #1A2E1A, #0D150D); --thumb-gradient-31: linear-gradient(135deg, #2E0A2E, #150315)
         }
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         html { font-size: 16px; -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
-        body { font-family: var(--font-sans); background: var(--bg); color: var(--text); line-height: 1.5; min-height: 100vh; }
+        body { font-family: var(--font-sans); background: var(--bg); color: var(--text); line-height: 1.8; min-height: 100vh; }
         a { text-decoration: none; color: inherit; }
         .progress-bar { position: fixed; top: 0; left: 0; height: 3px; background: var(--accent); z-index: 9999; width: 0%; transition: width 0.1s linear; }
         .back-to-top { position: fixed; bottom: 36px; right: 36px; width: 44px; height: 44px; background: var(--surface); border: 1px solid var(--border); color: var(--text-secondary); display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 999; opacity: 0; transform: translateY(20px); transition: opacity 0.3s, transform 0.3s; font-size: 18px; }
         .back-to-top.visible { opacity: 1; transform: translateY(0); }
         .back-to-top:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+        .sticky-nav { position: sticky; top: 0; z-index: 998; }
         .page-wrapper { width: 1440px; margin: 0 auto; transform-origin: top center; background: var(--bg); }
-        .header { display: flex; align-items: center; justify-content: space-between; padding: 16px 48px; background: var(--primary); border-bottom: 1px solid var(--secondary); height: 60px; gap: 32px; position: sticky; top: 0; z-index: 998; }
-        .header-logo { font-family: var(--font-serif); font-size: 20px; font-weight: 700; color: var(--text); }
-        .header-nav { display: flex; align-items: center; gap: 28px; }
-        .header-nav a { font-size: 15px; color: var(--text-secondary); transition: color 0.2s; }
-        .header-nav a.active, .header-nav a:hover { color: var(--accent); }
-        .header-right { display: flex; align-items: center; gap: 16px; }
-        .header-right button { background: none; border: none; font-size: 16px; cursor: pointer; color: var(--text-secondary); padding: 4px; line-height: 1; }
-        .hero { display: flex; flex-direction: column; align-items: center; padding: 80px 120px 60px; gap: 20px; background: var(--primary); text-align: center; }
-        .hero-badge { display: flex; align-items: center; gap: 8px; padding: 6px 16px; background: var(--secondary); border-radius: 9999px; }
-        .hero-badge-dot { width: 8px; height: 8px; background: var(--accent); border-radius: 9999px; }
-        .hero-badge-text { font-size: 13px; font-weight: 500; color: var(--text); }
-        .hero-title { font-family: var(--font-serif); font-size: 64px; font-weight: 700; color: var(--text); line-height: 78px; }
-        .hero-subtitle { font-family: var(--font-serif); font-size: 26px; font-weight: 600; color: var(--accent); line-height: 38px; }
-        .hero-desc { font-size: 16px; color: var(--text-secondary); line-height: 24px; }
-        .hero-buttons { display: flex; gap: 16px; margin-top: 4px; }
-        .btn-primary { display: flex; align-items: center; justify-content: center; padding: 14px 32px; background: var(--accent); color: #fff; font-size: 16px; font-weight: 500; cursor: pointer; transition: background 0.2s; }
-        .btn-primary:hover { background: var(--accent-hover); }
-        .btn-secondary { display: flex; align-items: center; justify-content: center; padding: 14px 32px; border: 1px solid var(--text-secondary); color: var(--text-secondary); font-size: 16px; font-weight: 500; cursor: pointer; transition: border-color 0.2s, color 0.2s; }
-        .btn-secondary:hover { border-color: var(--text); color: var(--text); }
-        .hero-line { width: 60px; height: 3px; background: var(--accent); }
-        .hero-stats { display: flex; gap: 48px; font-size: 14px; color: var(--text-muted); }
-        .articles { padding: 80px 120px; display: flex; flex-direction: column; gap: 40px; background: var(--bg); }
-        .section-header { display: flex; flex-direction: column; gap: 8px; }
-        .section-title { font-family: var(--font-serif); font-size: 36px; font-weight: 700; color: var(--text); line-height: 48px; }
-        .section-subtitle { font-size: 16px; color: #8A8A8A; line-height: 24px; }
-        .articles-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-        .article-card { display: flex; flex-direction: column; background: var(--surface); border: 1px solid var(--secondary); overflow: hidden; transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s ease, border-color 0.3s; color: inherit; }
-        .article-card:hover { transform: translateY(-6px); box-shadow: 0 12px 40px rgba(236,72,153,0.15); border-color: var(--accent); }
-        .card-thumb { height: 200px; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative; }
-        .card-thumb::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.5), transparent); opacity: 0; transition: opacity 0.3s; z-index: 1; }
-        .article-card:hover .card-thumb::after { opacity: 1; }
-        .card-thumb-label { font-family: var(--font-serif); font-size: 24px; font-weight: 700; color: var(--accent); position: relative; z-index: 2; transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1); }
-        .article-card:hover .card-thumb-label { transform: scale(1.15); }
-        .card-body { padding: 24px; display: flex; flex-direction: column; gap: 12px; }
-        .card-category { font-size: 12px; font-weight: 500; color: var(--accent); letter-spacing: 2px; }
-        .card-title { font-family: var(--font-serif); font-size: 20px; font-weight: 700; color: var(--text); line-height: 28px; transition: color 0.2s; }
-        .article-card:hover .card-title { color: var(--accent); }
-        .card-excerpt { font-size: 14px; color: #8A8A8A; line-height: 22px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-        .card-date { font-size: 13px; color: var(--text-muted); }
-        .view-more { display: flex; justify-content: center; padding-top: 8px; }
-        .view-more a { font-size: 15px; font-weight: 500; color: var(--accent); transition: color 0.2s; }
-        .view-more a:hover { color: var(--accent-hover); }
-        .footer { display: flex; flex-direction: column; background: var(--primary); }
-        .footer-top { display: flex; justify-content: space-between; padding: 64px 120px; gap: 80px; }
-        .footer-brand { display: flex; flex-direction: column; gap: 16px; max-width: 280px; }
-        .footer-logo { font-family: var(--font-serif); font-size: 22px; font-weight: 700; color: var(--text); }
-        .footer-tagline { font-size: 14px; color: var(--text-secondary); line-height: 22px; }
-        .footer-quote { font-family: var(--font-serif); font-size: 13px; color: var(--text-muted); font-style: italic; }
-        .footer-nav { display: flex; gap: 64px; }
-        .footer-col { display: flex; flex-direction: column; gap: 12px; }
-        .footer-col-title { font-size: 13px; font-weight: 700; color: var(--text); letter-spacing: 2px; }
-        .footer-col a { font-size: 14px; color: var(--text-secondary); transition: color 0.2s; }
-        .footer-col a:hover { color: var(--accent); }
-        .footer-divider { width: 100%; height: 1px; background: var(--secondary); }
-        .footer-bottom { display: flex; justify-content: space-between; align-items: center; padding: 24px 120px; gap: 16px; }
-        .footer-stats { display: flex; gap: 24px; font-size: 13px; color: var(--text-muted); }
-        .footer-copyright { font-size: 13px; color: var(--text-muted); }
+        .article-header { background: var(--surface-alt); padding: 48px 120px 40px; display: flex; justify-content: center; }
+        .header-inner { width: 720px; display: flex; flex-direction: column; align-items: center; gap: 16px; text-align: center; }
+        .back-link { font-size: 14px; color: var(--text-muted); transition: color 0.2s; }
+        .back-link:hover { color: var(--accent); }
+        .cat-badge { display: inline-flex; padding: 4px 14px; background: var(--surface); border-radius: 9999px; font-size: 13px; font-weight: 500; color: var(--accent); letter-spacing: 1px; }
+        .article-title { font-family: var(--font-serif); font-size: 44px; font-weight: 700; color: var(--text); line-height: 56px; }
+        .article-body { padding: 48px 120px 100px; display: flex; justify-content: center; }
+        .content-column { width: 720px; }
+        .article-content { font-size: 17px; color: var(--text-secondary); line-height: 32px; }
+        .article-content p { margin-bottom: 20px; }
+        .article-content h2 { font-family: var(--font-serif); font-size: 26px; font-weight: 700; color: var(--text); margin-top: 40px; margin-bottom: 16px; line-height: 36px; }
+        .article-content h3 { font-family: var(--font-serif); font-size: 20px; font-weight: 600; color: var(--text); margin-top: 32px; margin-bottom: 12px; line-height: 30px; }
+        .article-content strong, .article-content b { color: var(--text); font-weight: 600; }
+        .article-content blockquote { border-left: 3px solid var(--accent); padding: 12px 20px; margin: 24px 0; background: var(--surface); font-style: italic; color: var(--text-subtle); font-family: var(--font-serif); font-size: 16px; line-height: 28px; }
+        .article-content hr { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
+        .article-content ul, .article-content ol { margin: 16px 0; padding-left: 24px; }
+        .article-content li { margin-bottom: 8px; }
+        .article-footer { border-top: 1px solid var(--border); padding: 32px 120px; display: flex; justify-content: center; }
+        .article-footer-inner { width: 720px; display: flex; justify-content: space-between; align-items: center; }
+        .article-footer a { font-size: 14px; color: var(--text-muted); transition: color 0.2s; }
+        .article-footer a:hover { color: var(--accent); }
         @media (max-width: 768px) { .page-wrapper { width: 100%; } .header { padding: 12px 16px; height: auto; flex-wrap: wrap; } .header-nav { gap: 16px; } .hero { padding: 48px 24px 40px; } .hero-title { font-size: 36px; line-height: 44px; } .hero-subtitle { font-size: 20px; line-height: 30px; } .articles { padding: 40px 16px; } .articles-grid { grid-template-columns: 1fr !important; } .section-title { font-size: 26px; } .footer-top { flex-direction: column; padding: 40px 24px; gap: 32px; } .footer-bottom { flex-direction: column; padding: 20px 24px; gap: 12px; text-align: center; } .article-header { padding: 32px 16px 28px; } .header-inner, .content-column { width: 100%; } .article-title { font-size: 30px; line-height: 38px; } .article-body { padding: 32px 16px 60px; } .article-footer { padding: 24px 16px; } .article-footer-inner { width: 100%; flex-wrap: wrap; gap: 12px; } .sticky-nav { padding: 8px 16px; font-size: 13px; } .search-panel { width: 90vw; max-height: 60vh; } .back-to-top { bottom: 20px; right: 20px; width: 40px; height: 40px; } .hero-stats { flex-wrap: wrap; gap: 16px; } .hero-buttons { flex-direction: column; gap: 12px; } .card-thumb { height: 160px; } .card-body { padding: 16px; } .article-card { width: 100%; } .articles-grid { gap: 16px !important; } .footer-nav { flex-wrap: wrap; gap: 32px; } .footer { width: 100%; } .comparison-box { grid-template-columns: 1fr; } }
         [data-theme="light"] { --bg: #FAFAFA; --surface: #FFFFFF; --surface-alt: #F2F2F2; --primary: #F5F5F5; --secondary: #E4E4E7; --border: #E4E4E7; --border-subtle: #E4E4E7; --text: #09090B; --text-secondary: #52525B; --text-muted: #71717A; --text-subtle: #8A8A8A; --thumb-gradient-0: linear-gradient(135deg, #E8E0F0, #F5DCF0); --thumb-gradient-1: linear-gradient(135deg, #D5E0F5, #E0E8F8); --thumb-gradient-2: linear-gradient(135deg, #E0DCF5, #E8E5F8); --thumb-gradient-3: linear-gradient(135deg, #D0ECE8, #E0F0F0); --thumb-gradient-4: linear-gradient(135deg, #F0E5D5, #F5ECD0); --thumb-gradient-5: linear-gradient(135deg, #E0E0E8, #EAEAF0); --thumb-gradient-6: linear-gradient(135deg, #E5D8F0, #F0E5F5); --thumb-gradient-7: linear-gradient(135deg, #D5E0F0, #E5ECF5); --thumb-gradient-8: linear-gradient(135deg, #F0E0D0, #F5E8D8); --thumb-gradient-9: linear-gradient(135deg, #E8E8D5, #F0F0E0); --thumb-gradient-10: linear-gradient(135deg, #D5F0E0, #E0F5E8); --thumb-gradient-11: linear-gradient(135deg, #F0D8E0, #F5E5EC); --thumb-gradient-12: linear-gradient(135deg, #D5E5F0, #E0ECF5); --thumb-gradient-13: linear-gradient(135deg, #E0F0D5, #ECF5E0); --thumb-gradient-14: linear-gradient(135deg, #F0D8E8, #F5E5F0); --thumb-gradient-15: linear-gradient(135deg, #D5F0E5, #E0F5EC); --thumb-gradient-16: linear-gradient(135deg, #E5D8F0, #F0E5F5); --thumb-gradient-17: linear-gradient(135deg, #F0E0D5, #F5ECE0); --thumb-gradient-18: linear-gradient(135deg, #D5D8F0, #E0E5F5); --thumb-gradient-19: linear-gradient(135deg, #F0D8D8, #F5E5E5); --thumb-gradient-20: linear-gradient(135deg, #D5F0F0, #E0F5F5); --thumb-gradient-21: linear-gradient(135deg, #F0F0D5, #F5F5E0); --thumb-gradient-22: linear-gradient(135deg, #E5E5F0, #F0F0F8); --thumb-gradient-23: linear-gradient(135deg, #F0E5F0, #F5F0F5); --thumb-gradient-24: linear-gradient(135deg, #D5E5E5, #E0F0F0); --thumb-gradient-25: linear-gradient(135deg, #E0E0F0, #ECECF5); --thumb-gradient-26: linear-gradient(135deg, #F0F0E5, #F5F5EC); --thumb-gradient-27: linear-gradient(135deg, #D5D5E5, #E0E0F0); --thumb-gradient-28: linear-gradient(135deg, #E5D5D5, #F0E0E0); --thumb-gradient-29: linear-gradient(135deg, #D5E5D5, #E0F0E0); --thumb-gradient-30: linear-gradient(135deg, #E5F0E5, #F0F8F0); --thumb-gradient-31: linear-gradient(135deg, #F0D5F0, #F5E0F5) }
         .search-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 10000; display: none; align-items: flex-start; justify-content: center; padding-top: 120px; }
@@ -91,7 +66,9 @@
         .search-result-title { font-size: 16px; font-weight: 600; color: var(--text); font-family: var(--font-serif); }
         .search-result-title em { color: var(--accent); font-style: normal; }
         .search-result-excerpt { font-size: 13px; color: var(--text-muted); line-height: 20px; }
-        .search-empty { padding: 40px 24px; text-align: center; color: var(--text-muted); font-size: 15px; }</style></head>
+        .search-empty { padding: 40px 24px; text-align: center; color: var(--text-muted); font-size: 15px; }
+        @media (max-width: 768px) { .page-wrapper { width: 100%; } .header { padding: 12px 16px; height: auto; flex-wrap: wrap; } .header-nav { gap: 16px; } .hero { padding: 48px 24px 40px; } .hero-title { font-size: 36px; line-height: 44px; } .hero-subtitle { font-size: 20px; line-height: 30px; } .articles { padding: 40px 16px; } .articles-grid { grid-template-columns: 1fr !important; } .section-title { font-size: 26px; } .footer-top { flex-direction: column; padding: 40px 24px; gap: 32px; } .footer-bottom { flex-direction: column; padding: 20px 24px; gap: 12px; text-align: center; } .article-header { padding: 32px 16px 28px; } .header-inner, .content-column { width: 100%; } .article-title { font-size: 30px; line-height: 38px; } .article-body { padding: 32px 16px 60px; } .article-footer { padding: 24px 16px; } .article-footer-inner { width: 100%; flex-wrap: wrap; gap: 12px; } .sticky-nav { padding: 8px 16px; font-size: 13px; } .search-panel { width: 90vw; max-height: 60vh; } .back-to-top { bottom: 20px; right: 20px; width: 40px; height: 40px; } .hero-stats { flex-wrap: wrap; gap: 16px; } .hero-buttons { flex-direction: column; gap: 12px; } .card-thumb { height: 160px; } .card-body { padding: 16px; } .article-card { width: 100%; } .articles-grid { gap: 16px !important; } .footer-nav { flex-wrap: wrap; gap: 32px; } .footer { width: 100%; } .comparison-box { grid-template-columns: 1fr; } }</style>
+</head>
 <body>
 <div class="search-overlay" id="searchOverlay">
 <div class="search-panel">
@@ -100,50 +77,55 @@
 </div></div>
 <div class="progress-bar" id="progressBar"></div>
 <div class="back-to-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</div>
-<div class="page-wrapper">
-<header class="header">
-<a href="index.html" class="header-logo">Jason's Knowledge</a>
-<nav class="header-nav">
-<a href="index.html">首页</a><a href="graph.html">图谱</a><a href="archive.html">归档</a><a href="categories.html">分类</a><a href="about.html" class="active">关于</a>
+<nav class="sticky-nav" style="display:flex;align-items:center;justify-content:space-between;padding:12px 48px;background:var(--surface-alt);border-bottom:1px solid var(--border);gap:32px;">
+<a href="index.html" style="font-size:15px;color:var(--text-secondary);transition:color 0.2s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-secondary)'">← 返回首页</a>
+<span style="font-size:13px;color:var(--text-muted);">人在什么时候成长最快</span>
+<a href="index.html" style="font-size:15px;color:var(--text-secondary);transition:color 0.2s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-secondary)'">Jason's Knowledge</a>
 </nav>
-<div class="header-right"><button id="searchBtn" title="搜索 (Ctrl+K)">🔍</button><button id="themeBtn" title="切换主题">🌙</button></div>
-</header>
-<section class="hero" style="padding:60px 120px 40px;">
-<div class="hero-badge"><span class="hero-badge-dot"></span><span class="hero-badge-text">关于</span></div>
-<h1 class="hero-title" style="font-size:48px;line-height:60px;">关于本站</h1>
-</section>
-<section class="articles" style="gap:24px;">
-<div style="max-width:720px;margin:0 auto;display:flex;flex-direction:column;gap:32px;">
-<div style="background:var(--surface);border:1px solid var(--secondary);padding:40px;display:flex;flex-direction:column;gap:20px;">
-<h2 style="font-family:var(--font-serif);font-size:28px;color:var(--text);">Jason's Knowledge</h2>
-<p style="font-size:18px;color:var(--accent);font-family:var(--font-serif);">三代之间必降兴家之子</p>
-<div style="display:flex;flex-direction:column;gap:16px;font-size:16px;color:var(--text-secondary);line-height:28px;">
-<p>这个网站由我的 Obsidian 个人知识库自动生成。</p>
-<p>这里记录了我在阅读、思考和生活中积累的感悟与见解，涵盖个人成长、社会洞察、处世哲学等方面。</p>
-<p>每一篇文章都来自于日常的积累和反思——从家族传承到婚姻关系，从处世法则到营销理念，从职场生存到阶层流动。这些是我给自己留下的思考轨迹，也是我能给你的最宝贵经验，希望能对未来的你有所启发。</p>
-<p>「勤学、多思、严谨、进取」——这是我一生实践的八字真言，也是这个知识库的核心精神，希望你也能做到，并传承下去。</p>
-<p>这里会持续更新，在我离世之后将交由你来完善，也希望这些经验能帮助到你的后代，人活着的意义是什么？也许，就是传承吧！</p>
-</div>
-<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:8px;">
-<div style="background:var(--surface-alt);padding:20px;text-align:center;display:flex;flex-direction:column;gap:4px;"><strong style="font-size:28px;color:var(--accent);">39</strong><span style="font-size:13px;color:var(--text-muted);">图谱文章</span></div>
-<div style="background:var(--surface-alt);padding:20px;text-align:center;display:flex;flex-direction:column;gap:4px;"><strong style="font-size:28px;color:var(--accent);">6+</strong><span style="font-size:13px;color:var(--text-muted);">Wiki 专题</span></div>
-<div style="background:var(--surface-alt);padding:20px;text-align:center;display:flex;flex-direction:column;gap:4px;"><strong style="font-size:28px;color:var(--accent);">6</strong><span style="font-size:13px;color:var(--text-muted);">分类</span></div>
-<div style="background:var(--surface-alt);padding:20px;text-align:center;display:flex;flex-direction:column;gap:4px;"><strong style="font-size:28px;color:var(--accent);">5w+</strong><span style="font-size:13px;color:var(--text-muted);">字数</span></div>
-</div>
-<p style="font-size:14px;color:var(--text-muted);margin-top:4px;">最后更新：2026-06-11 · 由 Obsidian &amp; WorkBuddy 驱动</p>
-</div>
-</div>
-</section>
-<footer class="footer">
-<div class="footer-top">
-<div class="footer-brand"><span class="footer-logo">Jason's Knowledge</span><p class="footer-tagline">三代之间必降兴家之子</p><p class="footer-quote">莫愁前路无知己，天下谁人不识君</p></div>
-<div class="footer-nav">
-<div class="footer-col"><span class="footer-col-title">分类</span><a href="categories.html">Wiki</a><a href="categories.html">图谱</a></div>
-<div class="footer-col"><span class="footer-col-title">导航</span><a href="archive.html">全部文章</a><a href="about.html">关于本站</a></div>
-</div></div>
-<div class="footer-divider"></div>
-<div class="footer-bottom"><div class="footer-stats"><span>📝 39 篇文章</span><span>📅 2026</span></div><p class="footer-copyright">© 2026 Jason · Obsidian &amp; WorkBuddy</p></div>
-</footer>
+<div class="page-wrapper">
+<header class="article-header"><div class="header-inner">
+<span class="cat-badge">图谱 · 人在什么时候成长最快</span>
+<h1 class="article-title">人在什么时候成长最快</h1>
+</div></header>
+<main class="article-body"><div class="content-column"><div class="article-content">
+<p>牵头做事最炼人</p>
+
+<p>负责一件事，成败系于一身，躲不掉，只能竭尽全力</p>
+<p>处处是问题；人、钱、上下左右、节奏、协调，连自己都是问题</p>
+<p>每天解决问题，如同八卦炉里炼真金，伤病一身，本事真长</p>
+
+<p>一个人变强的过程</p>
+<p>就是任由一切痛苦贯穿全身</p>
+<p>到最后，获得极致的情绪稳定</p>
+
+<p>成长的三个条件：</p>
+<p>一、要有动力，更要有压力</p>
+<p>动力让人主动，压力带来痛感和修正</p>
+<p>只有动力没有压力，容易陷入“自我感动式努力”，难有真成长</p>
+
+<p>一个人的快速成长</p>
+<p>是他失去安全感的时候</p>
+<p>他必须克服恐惧、依赖和失望</p>
+<p>开始对生活拥有掌控感，戒掉情绪</p>
+<p>真正能给你支撑的，是丰富的知识储备，足够的经济基础，持续的情绪稳定，可控的生活节奏</p>
+
+<p>走投无路的时候，就是大彻大悟</p>
+<p>大彻大悟后，就是无所畏惧</p>
+<p>无所畏惧之后，就是风生水起</p>
+
+<p>二、要有支持，也要有劝诫</p>
+<p>支持是权、资源、肯定</p>
+<p>劝诫是有人点醒盲区，避免一根筋</p>
+
+<p>三、要有认真，也要有放开</p>
+<p>做事必须扛在肩上，但不可过度焦虑</p>
+<p>控制不了的就别在意，举重若轻，方能走稳带稳团队</p>
+</div></div></main>
+<footer class="article-footer"><div class="article-footer-inner">
+<a href="人和人关系的本质.html">← 人和人关系的本质</a>
+<a href="javascript:history.back()">回到上一页</a>
+<a href="人生的本质.html">人生的本质 →</a>
+</div></footer>
 </div>
 <script>var SEARCH_INDEX=[{"t": "一个很好的人，为什么会突然离开", "e": "好人不长寿，祸害活千年", "u": "一个很好的人为什么会突然离开.html"}, {"t": "一人公司“OPC”", "e": "“OPC”（One Person Company），中文翻译成“一人创业公司”。", "u": "一人公司OPC.html"}, {"t": "三代之间必降兴家之子", "e": "每一个家族的翻身", "u": "三代之间必降兴家之子.html"}, {"t": "三观是什么", "e": "1、世界观", "u": "三观是什么.html"}, {"t": "不要介入他人的因果", "e": "古训：", "u": "不要介入他人的因果.html"}, {"t": "世界的本质", "e": "确定论", "u": "世界的本质.html"}, {"t": "为什么要看书", "e": "这个世界上有很多人，有很多种选择", "u": "为什么要看书.html"}, {"t": "事情的第一核心", "e": "1. 家庭的第一核心，是经济，而不是感情。经济基础直接决定家庭的安稳度，光靠情绪维系，终究很难扛住现实的风雨。 \n\n2. 职场的第一准则，是价值，而不是努力。只懂埋头苦干却不提升核心竞争力，很容易被替", "u": "事情的第一核心.html"}, {"t": "亲子关系是什么", "e": "成为孩子背后的山", "u": "亲子关系是什么.html"}, {"t": "人不可能每一步都正确", "e": "我们不能站在现在的高度", "u": "人不可能每一步都正确.html"}, {"t": "人和人关系的本质", "e": "四个字：价值交换", "u": "人和人关系的本质.html"}, {"t": "人在什么时候成长最快", "e": "牵头做事最炼人", "u": "人在什么时候成长最快.html"}, {"t": "人生的本质", "e": "在这一生有限的时间里", "u": "人生的本质.html"}, {"t": "人生的运气", "e": "一个人", "u": "人生的运气.html"}, {"t": "什么叫开悟", "e": "如果一个人能够发现自己身上的种种缺点", "u": "什么叫开悟.html"}, {"t": "什么是命运", "e": "当你遇见一件事", "u": "什么是命运.html"}, {"t": "你要优秀到什么程度", "e": "优秀到你喜欢的人，不付出就得不到", "u": "你要优秀到什么程度.html"}, {"t": "十个第一性原理", "e": "成长的第一性原理：持续迭代，不是原地等待", "u": "十个第一性原理.html"}, {"t": "县城真相：世袭与垄断下的底层困局", "e": "一线城市的打工者中流传着一种格外刺耳的声音，他们认为，只要逃离了北上广深的内卷，回到看似安逸的县城，就能抬头做人，当个有头有脸的人物", "u": "县城真相世袭与垄断下的底层困局.html"}, {"t": "后半句是精华", "e": "不听老人言，吃亏在眼前；尽信老人言，终身未向前", "u": "后半句是精华.html"}, {"t": "和任何人搞好关系的三个模型", "e": "半个月前，北京。一位研究了一辈子《毛选》的前辈，在海淀他家的书房里给我上了这辈子最重要的一课。", "u": "和任何人搞好关系的三个模型.html"}, {"t": "处世法则", "e": "1、别轻易同情任何人，很多看似可怜的人，身上都藏着让人无奈的性格与选择", "u": "处世法则.html"}, {"t": "如何培养一个人", "e": "男孩和女孩，从出生那天起，就注定了不同的培养路径：", "u": "如何培养一个人.html"}, {"t": "如何有底气", "e": "一个人在社会上，怎样才算有底气？", "u": "如何有底气.html"}, {"t": "如何理解事以密成，言以泄败", "e": "如果一件事的收益主要属于你自己", "u": "如何理解事以密成言以泄败.html"}, {"t": "婚姻是什么", "e": "一个七十多岁的老人说，“婚姻就是我午夜三点醒来的时候，口渴或者伤口疼，我只需要捅捅睡在旁边的那个人，她就知道，我要喝水”", "u": "婚姻是什么.html"}, {"t": "孝心是什么", "e": "前三十年，看父敬子", "u": "孝心是什么.html"}, {"t": "寒门难出贵子", "e": "寒门立志", "u": "寒门难出贵子.html"}, {"t": "当滤镜褪去：吸引力的反思", "e": "当一个男人真正挣脱性欲带来的执念与滤镜，不再被原始冲动裹挟着审视异性，便会恍然惊觉：世间绝大多数女性，除去皮囊带来的视觉吸引，并无太多值得过度追捧的光环", "u": "当滤镜褪去吸引力的反思.html"}, {"t": "待人接物", "e": "左手戴金，右手戴银，背后教妻，当面教子", "u": "待人接物.html"}, {"t": "男人该有的样子", "e": "两种气场在一个人身上兼具", "u": "男人该有的样子.html"}, {"t": "线性思维与非线性", "e": "线性思维与非线性思维在赚钱认知上的根本差异：", "u": "线性思维与非线性.html"}, {"t": "结局重要还是过程重要", "e": "结局已定，就好好做过程", "u": "结局重要还是过程重要.html"}, {"t": "职场斗争的四层认知颠覆", "e": "跟过真正的大佬后，才意识到职场斗争的残酷", "u": "职场斗争的四层认知颠覆.html"}, {"t": "自我客体化：控制你的情绪", "e": "思考解决不了情绪", "u": "自我客体化控制你的情绪.html"}, {"t": "荷花定律", "e": "一个月30天", "u": "荷花定律.html"}, {"t": "诗词：一去不返的青春", "e": "春风若有怜花意，可否许我再少年", "u": "诗词一去不返的青春.html"}, {"t": "诗词：逆风翻盘", "e": "十年潜龙困深渊，一朝乘风上九天", "u": "诗词逆风翻盘.html"}, {"t": "高情商说话", "e": "1、先讲对方想听的", "u": "高情商说话.html"}, {"t": "传承与家族", "e": "来源：如何培养一个人", "u": "传承与家族.html"}, {"t": "商业与创业", "e": "来源：一人公司\"OPC\"", "u": "商业与创业.html"}, {"t": "处世与人际", "e": "来源：处世法则", "u": "处世与人际.html"}, {"t": "婚姻与亲情", "e": "来源：婚姻是什么", "u": "婚姻与亲情.html"}, {"t": "接纳与安命", "e": "来源：人生的本质", "u": "接纳与安命.html"}, {"t": "阶层与社会", "e": "来源：县城真相：世袭与垄断下的底层困局", "u": "阶层与社会.html"}];</script>
 <script>

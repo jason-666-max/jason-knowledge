@@ -1,0 +1,3 @@
+.stversions/
+.syncthing*
+*.sync-conflict*
